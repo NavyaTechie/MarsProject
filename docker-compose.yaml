@@ -1,0 +1,22 @@
+
+
+services:
+  mars.web.app:
+    image: mvpstudionz/mars.web.app:local #change local to toolbox if you're using docker toolbox
+    ports:
+      - "5000:5000"
+
+  mars.service.identity:
+    image: mvpstudionz/mars.services.identity
+    ports:
+      - "60968:80"
+
+  mars.service.listing:
+    image: mvpstudionz/mars.services.listing
+    ports:
+      - "51689:80"
+
+  mars.service.profile:
+    image: mvpstudionz/mars.services.profile
+    ports:
+      - "60190:80"

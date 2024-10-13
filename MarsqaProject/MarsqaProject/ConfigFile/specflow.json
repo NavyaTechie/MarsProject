@@ -1,0 +1,9 @@
+{
+  "webUrl": "http://localhost:5000/",
+  "profileUrl": "http://localhost:5000/Account/Profile",
+  "username": "navya.rem@gmail.com",
+  "password": "55Password55",
+  "browserType": "chrome"
+
+
+}
