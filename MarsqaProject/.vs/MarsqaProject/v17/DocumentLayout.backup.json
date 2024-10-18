@@ -3,36 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|c:\\users\\rmzac\\desktop\\marsproject\\marsqaproject\\marsqaproject\\hooks\\hooks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|solutionrelative:marsqaproject\\hooks\\hooks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|c:\\users\\rmzac\\desktop\\marsproject\\marsqaproject\\marsqaproject\\utilities\\startuplog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|solutionrelative:marsqaproject\\utilities\\startuplog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|c:\\users\\rmzac\\desktop\\marsproject\\marsqaproject\\marsqaproject\\pages\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|solutionrelative:marsqaproject\\pages\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|c:\\users\\rmzac\\desktop\\marsproject\\marsqaproject\\marsqaproject\\pages\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|solutionrelative:marsqaproject\\pages\\homepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|c:\\users\\rmzac\\desktop\\marsproject\\marsqaproject\\marsqaproject\\stepdefinition\\searchskillstepdefinition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|solutionrelative:marsqaproject\\stepdefinition\\searchskillstepdefinition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|c:\\users\\rmzac\\desktop\\marsproject\\marsqaproject\\marsqaproject\\stepdefinition\\loginstepdefinition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|solutionrelative:marsqaproject\\stepdefinition\\loginstepdefinition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|c:\\users\\rmzac\\desktop\\marsproject\\marsqaproject\\marsqaproject\\features\\searchskillfeature.feature||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|solutionrelative:marsqaproject\\features\\searchskillfeature.feature||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|c:\\users\\rmzac\\desktop\\marsproject\\marsqaproject\\marsqaproject\\stepdefinition\\languagesstepdefinition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AEBEA8A0-C931-4CE1-8BF7-9370D1DBD540}|MarsqaProject\\MarsqaProject.csproj|solutionrelative:marsqaproject\\stepdefinition\\languagesstepdefinition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,111 +13,21 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 112,
+          "DockedWidth": 275,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Hooks.cs",
-              "DocumentMoniker": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\Hooks\\Hooks.cs",
-              "RelativeDocumentMoniker": "MarsqaProject\\Hooks\\Hooks.cs",
-              "ToolTip": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\Hooks\\Hooks.cs",
-              "RelativeToolTip": "MarsqaProject\\Hooks\\Hooks.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAcwHcAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T03:19:07.1Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "StartUpLog.cs",
-              "DocumentMoniker": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\Utilities\\StartUpLog.cs",
-              "RelativeDocumentMoniker": "MarsqaProject\\Utilities\\StartUpLog.cs",
-              "ToolTip": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\Utilities\\StartUpLog.cs",
-              "RelativeToolTip": "MarsqaProject\\Utilities\\StartUpLog.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T03:16:17.136Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HomePage.cs",
-              "DocumentMoniker": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\Pages\\HomePage.cs",
-              "RelativeDocumentMoniker": "MarsqaProject\\Pages\\HomePage.cs",
-              "ToolTip": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\Pages\\HomePage.cs",
-              "RelativeToolTip": "MarsqaProject\\Pages\\HomePage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T02:47:23.945Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SearchSkillStepDefinition.cs",
-              "DocumentMoniker": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\StepDefinition\\SearchSkillStepDefinition.cs",
-              "RelativeDocumentMoniker": "MarsqaProject\\StepDefinition\\SearchSkillStepDefinition.cs",
-              "ToolTip": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\StepDefinition\\SearchSkillStepDefinition.cs",
-              "RelativeToolTip": "MarsqaProject\\StepDefinition\\SearchSkillStepDefinition.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAADwv0EAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T02:14:51.971Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SearchSkillFeature.feature",
-              "DocumentMoniker": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\Features\\SearchSkillFeature.feature",
-              "RelativeDocumentMoniker": "MarsqaProject\\Features\\SearchSkillFeature.feature",
-              "ToolTip": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\Features\\SearchSkillFeature.feature",
-              "RelativeToolTip": "MarsqaProject\\Features\\SearchSkillFeature.feature",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAANAAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQWSURBVDhPdVRLb1tFFP7mPnztaydObOcJcWolhDRpVURQAyWNWgItsGlZ0YoFEgseKxCCFWv4AWzYIxAgQVRVlSo1En1IoDRtSUEpRFWUd9I4DztOff269r18c\u002B0oSRGf9dkzZ2Y\u002BnznnzBH4P3zRGMARXxtHcbKZdMg1uFjCVCmJr9IFzg/Cdd2Dgm\u002BQnylBTISH0Kydhakco0WKGXKZKFDwEfLOJObLV/BN5h42nXxtzYNa\u002BwVeNBScNRPoMs5BNd6FppwUEM8qQmlz4UYBEVGFGhNCtLo6vW5UutGglNDvS8GvZLFc9mT2BF8zWzFgjiCjvwdXDAc1M9JX36MnQp0ia\u002BfQZrbgWEOf8KuGb7OYikARXYjrIXTrj7DjJHG/VJQyVcGYIvC8McwNFzkbUaCorf5mXIifx\u002BmWE1jMrWAwOoC34\u002BcYJuBu\u002Bk95SiEPkRmslZcZglVYrmcEPgqbGPSf4ui04F/XayHYbhl\u002BNYBOM46j4T6ciL2AOtrLtO\u002BDTp7BkH8IH4c9g\u002BZ9G6IPmkj4FX/ombqE\u002BLT3Q6zk1rBgLeO3jdtYyK9gPrcIh\u002B7NZhe8I8RuQp/msJszxhlbVQ\u002BBLrKpgopquzbXBNoDLUjbGUykJykyjzup\u002BxjfuoclXv8JBJj5ZhYVhatxkIiQpu2UsVFMYWLzDyQLG8iWLY9WOYd0aRu2U0LMiKA7lEDMFwWzXj0NBMmYHOwKepCeyW8Zv216Z9kWr\u002BlwEyPLT6PRgJebjuNi51s42TQIkzGuQep44dsVXCctUwugP9yDT3rex6stwzgUiiOshRHW6xE1GuEXfnQE2vFm6wj3fIAIbTXI4k7LQdXnVwIKIuoAX87hfKUokoV13FwfR4f5FE41vQSfZuB49DnPq8cMwZXVa5hgTKcy0yg5JabdHUfaGcWveavq4c38Iubsv1kSy\u002BvFTVxekQcmIT3ua\u002BiBrugIqkGWz2Hv6tfXf8fY2g0vtsQyZu0ZaqTkpOrhbLmIuOZHlx7lM0sUnILuU3TRHmhFzsnhFr3N2DsIaUHMsXymMv\u002BAe1jisijdG7hTuopfrIdSaq85vBOqxxnzdejic1r7afGxLoWqKEJ6ItPiU31MUoXZtinmdZ8k7/wlruV/xvfZDSmz95YXyzYsZw1HjQc8LYu0oeJWZCnVEud6YrTJiRTLkF/jp\u002BxVjLHyi/JR7heUhu1KgcHdRK8xx5UZWmXm5PNqkltqkE3gIUrudxQbxe3CHFIs0Br2BCUsiiYZT00sMUnzvOUOGlVZG0dImYElchxblcu4lR/FWG4GKdfrMrs4KCghl/8quWxHWTbZAnp9IVpkV5nmta/zBj/ibukSvn28yr3e/ffjYMd\u002BEhfqwjgf7OConZyGqCRxKVfED5a3/F8A/wKUXZtBUQWfiQAAAABJRU5ErkJggg==",
-              "WhenOpened": "2024-10-13T02:12:17.823Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "LoginPage.cs",
               "DocumentMoniker": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\Pages\\LoginPage.cs",
               "RelativeDocumentMoniker": "MarsqaProject\\Pages\\LoginPage.cs",
               "ToolTip": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\Pages\\LoginPage.cs",
               "RelativeToolTip": "MarsqaProject\\Pages\\LoginPage.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAUwCIAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA/wCAAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T22:59:28.361Z",
+              "WhenOpened": "2024-10-18T04:16:47.386Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "LoginStepDefinition.cs",
-              "DocumentMoniker": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\StepDefinition\\LoginStepDefinition.cs",
-              "RelativeDocumentMoniker": "MarsqaProject\\StepDefinition\\LoginStepDefinition.cs",
-              "ToolTip": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\StepDefinition\\LoginStepDefinition.cs",
-              "RelativeToolTip": "MarsqaProject\\StepDefinition\\LoginStepDefinition.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAADwv3MAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-27T00:31:49.962Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "LanguagesStepDefinition.cs",
-              "DocumentMoniker": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\StepDefinition\\LanguagesStepDefinition.cs",
-              "RelativeDocumentMoniker": "MarsqaProject\\StepDefinition\\LanguagesStepDefinition.cs",
-              "ToolTip": "C:\\Users\\rmzac\\Desktop\\MarsProject\\MarsqaProject\\MarsqaProject\\StepDefinition\\LanguagesStepDefinition.cs",
-              "RelativeToolTip": "MarsqaProject\\StepDefinition\\LanguagesStepDefinition.cs",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAuwCIAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T01:09:59.703Z"
             }
           ]
         }

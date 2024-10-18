@@ -5,6 +5,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.BiDi.Modules.Log;
 using System;
+using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -17,227 +18,273 @@ namespace MarsqaProject.StepDefinition
 {
     public class LanguagesStepDefinition : BasicTests
     {
-        LoginPage loginPage;
-        HomePage homePage;
-        LanguagePage languagePage;
-        ProfilePage profilePage;
+        private readonly IWebDriver _driver;
+        private readonly LoginPage _loginPage;
+        private readonly HomePage _homePage;
+        private readonly LanguagePage _languagePage;
+        private readonly ProfilePage _profilePage;
         int row_count = 0;
+        public ScenarioContext _scenarioContext;
 
-        public LanguagesStepDefinition(FeatureContext featureContext) : base(featureContext)
+
+        public LanguagesStepDefinition(IWebDriver driver, ScenarioContext scenarioContext, FeatureContext featureContext) : base(driver, featureContext)
         {
+            _driver = driver;
+            _scenarioContext = scenarioContext;
+
+            _loginPage = new LoginPage(_driver);
+            _homePage = new HomePage(_driver);
+            _profilePage = new ProfilePage(_driver);
+            _languagePage = new LanguagePage(_driver);
         }
 
-        [Given(@"navigate to the language tab")]
-        public void GivenNavigateToTheLanguageTab()
+
+
+        [Given(@"User login the system")]
+        public void GivenUserLoginTheSystem()
         {
-            languagePage = new LanguagePage();
-            languagePage.NavigateToLanguageTab(driver);
+            string url = GetAppConfig("url");
+            _driver.Navigate().GoToUrl(url);
+            _homePage.ClickSignInLink();
+            PerformLogin();
+
+
         }
 
-        [Given(@"click the Add New Button")]
-        public void GivenClickTheAddNewButton()
+        [When(@"The data is clean up")]
+        public void WhenTheDataIsCleanUp()
         {
-            languagePage.ClickAddNewButton(driver);
+            Thread.Sleep(2000);
+            _languagePage.NavigateToLanguageTab();
+            _languagePage.ClearUpAllTheData();
+            _scenarioContext["language_count"] = 0;
+            row_count = 0;
+
         }
 
-        [When(@"input the  ""([^""]*)"" and ""([^""]*)"" and click the add button")]
-        public void WhenInputTheAndAndClickTheAddButton(string english, string level)
+        [When(@"Navigate to the language tab")]
+        public void WhenNavigateToTheLanguageTab()
         {
-            languagePage.EnterNewLanguage(driver, "new", english, level);
-            languagePage.ClickAddButton(driver);
+            _languagePage.NavigateToLanguageTab();
         }
 
-        [Then(@"a ""([^""]*)"" will be display to show the result")]
-        public void ThenAWillBeDisplayToShowTheResult(string message)
+        [Given(@"Add a language succeed")]
+        public void GivenAddALanguageSucceed(Table table)
         {
-            Console.WriteLine(message);
-            profilePage = new ProfilePage();
-            string originalResult = profilePage.GetMessage(driver);
-            Assert.That(originalResult.Contains(message));
-            profilePage.ClickMessageCloseButton(driver);
+            List<string> languages = new List<string>();
+            List<string> levels = new List<string>();
 
-           
-        }
-
-        [Given(@"click on the Add New Button")]
-        public void GivenClickOnTheAddNewButton()
-        {
-            languagePage.ClickAddNewButton(driver);    
-        }
-
-        [When(@"input the  valid information and click the Cancel button")]
-        public void WhenInputTheValidInformationAndClickTheCancelButton(Table table)
-        {
-            
-        }
-
-        [Then(@"no new language is created")]
-        public void ThenNoNewLanguageIsCreated()
-        {
-            throw new PendingStepException();
-        }
-
-        [Given(@"click the edit Button of a ""([^""]*)""")]
-        public void GivenClickTheEditButtonOfA(string malayalam)
-        {
-            languagePage.ClickEditIconOfALanguage(driver, malayalam);
-        }
-
-        [When(@"change the ""([^""]*)"" and ""([^""]*)"" and click Update button")]
-        public void WhenChangeTheAndAndClickUpdateButton(string hindi, string basic)
-        {
-            languagePage.EnterNewLanguage(driver,"edit",hindi,basic);
-            languagePage.ClickUpdateButton(driver);
-        }
-
-        [When(@"click on the delete Button of a ""([^""]*)""")]
-        public void WhenClickOnTheDeleteButtonOfA(string english)
-        {
-            languagePage.ClickDeleteIconOfALanguage(driver,english);
-        }
-
-        [When(@"the user has exactly (.*) languages")]
-        public void WhenTheUserHasExactlyLanguages(string p0)
-        {
-            row_count = languagePage.GetRowCount(driver,"Languages");
-        }
-
-        [Then(@"the button should not be visible")]
-        public void ThenTheButtonShouldNotBeVisible()
-        {
-            bool isButtonDisplayed = driver.FindElement(languagePage.addNewButton).Displayed;
-            if (row_count == 4)
+            foreach (TableRow row in table.Rows)
             {
-
-                Assert.Fail(isButtonDisplayed);
+                _languagePage.ClickAddNewButton();
+                _languagePage.InputNewLanguageDetails("new", row[0], row[1]);
+                _languagePage.ClickAddButton();
+                _languagePage.ClickMessageCloseButton();
+                // Store the languages and levels in lists
+                languages.Add(row[0]);
+                levels.Add(row[1]);
             }
-            else
+
+            int language_count_page = _languagePage.GetLanguageCount();
+            Log.Information("Row count is: " + language_count_page);
+
+            // Store lists in ScenarioContext
+            _scenarioContext.Set(languages, "languages");
+            _scenarioContext.Set(levels, "levels");
+            // Store the last added language and level
+            if (languages.Count > 0 && levels.Count > 0)
             {
-                Assert.Pass(isButtonDisplayed);
+                _scenarioContext.Set(languages[^1], "language"); // Last element of the list
+                _scenarioContext.Set(levels[^1], "level");
             }
+            _scenarioContext["language_count"] = table.Rows.Count;
+            // Assert that the number of added languages matches the number of rows in the table
+            Assert.AreEqual(table.Rows.Count, language_count_page, "The count of languages on the page does not match the expected count.");
         }
 
-        [When(@"the user has fewer than (.*) languages")]
-        public void WhenTheUserHasFewerThanLanguages(int p0)
+
+        [When(@"I click the language tab")]
+        public void WhenIClickTheLanguageTab()
         {
-            row_count = languagePage.GetRowCount(driver, "Languages");
+            _languagePage.RefreshPage();
         }
 
-        [Then(@"the button should be visible")]
-        public void ThenTheButtonShouldBeVisible()
+
+        [Then(@"I should see the language list with correct information")]
+        public void ThenIShouldSeeTheLanguageListWithCorrectInformation()
         {
-            bool isButtonDisplayed = driver.FindElement(languagePage.addNewButton).Displayed;
-            if (row_count == 4)
+            ValidateLanguageCount();
+        }
+
+
+        [Then(@"The AndNew button is invisible")]
+        public void ThenTheAndNewButtonIsInvisible()
+        {
+            Assert.IsTrue(_scenarioContext["language_count"].Equals(4));
+            Assert.IsTrue(!_languagePage.AddBewButtonIsVisible());
+        }
+
+        [Then(@"The AndNew button is visible")]
+        public void ThenTheAndNewButtonIsVisible()
+        {
+            Assert.Less((int)_scenarioContext["language_count"], 4);
+            Assert.IsTrue(_languagePage.AddBewButtonIsVisible());
+        }
+
+
+        [Then(@"New language is created")]
+        public void ThenNewLanguageIsCreated()
+        {
+
+            string language = _languagePage.getLastRowLanguage();
+            string level = _languagePage.getLastRowLevel();
+
+            /*Assert.IsTrue(_languagePage.GetLanguageCount().Equals(_scenarioContext["language_count"]));
+            Assert.IsTrue(language.Equals(_scenarioContext["language"].ToString()));
+            Assert.IsTrue(level.Equals(_scenarioContext["level"].ToString()));*/
+
+            ValidateLanguageCount();
+            ValidateLanguageAndLevel(language, level);
+        }
+        private void ValidateLanguageCount()
+        {
+
+            int expectedLanguageCount = _scenarioContext.Get<int>("language_count");
+            int actualLanguageCount = _languagePage.GetLanguageCount();
+
+            Assert.AreEqual(expectedLanguageCount, actualLanguageCount, $"Expected language count: {expectedLanguageCount}, but got: {actualLanguageCount}");
+        }
+
+        private void ValidateLanguageAndLevel(string language, string level)
+        {
+            string expectedLanguage = _scenarioContext.Get<string>("language");
+            string expectedLevel = _scenarioContext.Get<string>("level");
+
+            Assert.AreEqual(expectedLanguage, language, $"Expected language: '{expectedLanguage}', but got: '{language}'");
+            Assert.AreEqual(expectedLevel, level, $"Expected level: '{expectedLevel}', but got: '{level}'");
+        }
+
+        [Then(@"No more language is created")]
+        public void ThenNoMoreLanguageIsCreated()
+        {
+
+            Assert.IsTrue(_languagePage.GetLanguageCount().Equals(_scenarioContext["language_count"]));
+        }
+
+        [When(@"Add another language")]
+        public void WhenAddAnotherLanguage(Table table)
+        {
+            foreach (TableRow row in table.Rows)
             {
+                _languagePage.ClickAddNewButton();
+                _languagePage.InputNewLanguageDetails("new", row[0], row[1]);
+                _languagePage.ClickAddButton();
+                // _profilePage.ClickMessageCloseButton();
+                _scenarioContext["language_new"] = row[0];
+                _scenarioContext["level_new"] = row[1];
 
-                Assert.IsTrue(isButtonDisplayed);
             }
-            else
+        }
+
+
+
+
+
+        [When(@"Input the language name ""(.*)"" and level ""(.*)""")]
+        public void WhenInputTheLanguageAndLevel(string language, string level)
+        {
+            Log.Information("the language is " + language + " the level is " + level);
+            _languagePage.InputNewLanguageDetails("new", language, level);
+            _scenarioContext["language"] = language;
+            _scenarioContext["level"] = level;
+        }
+
+
+        [Then(@"The language will be delete")]
+        public void ThenTheLanguageWillBeDelete()
+        {
+            Thread.Sleep(1000);
+            Assert.IsTrue(_languagePage.GetLanguageCount().Equals(0));
+        }
+
+
+        [When(@"Update the language")]
+        public void WhenUpdateTheLanguage(Table table)
+        {
+            foreach (TableRow row in table.Rows)
             {
-                Assert.IsFalse(isButtonDisplayed);
+                _languagePage.InputNewLanguageDetails("edit", row[0], row[1]);
+                // _profilePage.ClickMessageCloseButton();
+                _scenarioContext["language_update"] = row[0];
+                _scenarioContext["level_update"] = row[1];
             }
         }
-        
-        [When(@"input the  ""([^""]*)"" and ""([^""]*)"" and click the add button")]
-        public void WhenInputTheAndAndClickTheAddButton(string english, string fluent)
-        {
-            driver.FindElement(By.XPath("//input[@name='language']")).SendKeys(english);
-            driver.FindElement(By.XPath("//select[@name='level']")).SendKeys(fluent);
-            driver.FindElement(By.XPath("//button[text()='Add']")).Click();
-        }
 
-        [Then(@"a ""([^""]*)"" will be display to show the result")]
-        public void ThenAWillBeDisplayToShowTheResult(string message)
-        {
-            string actualMessage = driver.FindElement(By.XPath("//div[@class='message']")).Text;
-            Assert.AreEqual(message, actualMessage, "The expected message was not displayed.");
-        }
 
-        
-        [When(@"input the  valid information and click the Cancel button")]
-        public void WhenInputTheValidInformationAndClickTheCancelButton(Table table)
+        [Then(@"The language is updated")]
+        public void ThenTheLanguageIsUpdated()
         {
-            throw new PendingStepException();
-        }
+            Thread.Sleep(1000);
+            string language_page = _languagePage.getLastRowLanguage();
+            string level_page = _languagePage.getLastRowLevel();
 
-        [Then(@"no new language is created")]
-        public void ThenNoNewLanguageIsCreated()
-        {
-            throw new PendingStepException();
-        }
-
-        [Given(@"click the edit Button of a ""([^""]*)""")]
-        public void GivenClickTheEditButtonOfA(string malayalam)
-        {
-            throw new PendingStepException();
-        }
-
-        [When(@"change the ""([^""]*)"" and ""([^""]*)"" and click Update button")]
-        public void WhenChangeTheAndAndClickUpdateButton(string hindi, string basic)
-        {
-            throw new PendingStepException();
-        }
-
-        [When(@"click on the delete Button of a ""([^""]*)""")]
-        public void WhenClickOnTheDeleteButtonOfA(string english)
-        {
-            throw new PendingStepException();
-        }
-
-        [When(@"the user has exactly (.*) languages")]
-        public void WhenTheUserHasExactlyLanguages(int p0)
-        {
-            throw new PendingStepException();
-        }
-
-        [Then(@"the button should not be visible")]
-        public void ThenTheButtonShouldNotBeVisible()
-        {
-            throw new PendingStepException();
-        }
-
-        [When(@"the user has fewer than (.*) languages")]
-        public void WhenTheUserHasFewerThanLanguages(int p0)
-        {
-            throw new PendingStepException();
-        }
-
-        [Then(@"the button should be visible")]
-        public void ThenTheButtonShouldBeVisible()
-        {
-            throw new PendingStepException();
-        }
-
-        [When(@"input the ""([^""]*)"" and ""([^""]*)"" and click the add button")]
-        public static void WhenInputTheAndAndClickTheAddButton(string malayalam, string native)
-        {
-
-        }
-
-        [Then(@"""([^""]*)"" will be displayed")]
-        public void ThenWillBeDisplayed(string p0)
-        {
-            throw new PendingStepException();
-        }
-
-        [When(@"input the ""([^""]*)"" and ""([^""]*)"" and click the add button")]
-        public void WhenInputTheAndAndClickTheAddButton(string p0, string basic)
-        {
-            throw new PendingStepException();
-        }
-
-        [When(@"input the ""([^""]*)"" and leave the level empty")]
-        public void WhenInputTheAndLeaveTheLevelEmpty(string english)
-        {
-            throw new PendingStepException();
-        }
-
-        [When(@"input the ""([^""]*)"" and ""([^""]*)"" and click the add button")]
-        public void WhenInputTheAndAndClickTheAddButton(string p0, string fluent)
-        {
-            throw new PendingStepException();
+            Log.Information("the language is " + language_page + " the level is " + level_page);
+            Assert.IsTrue(language_page.Equals(_scenarioContext["language_update"].ToString()));
+            Assert.IsTrue(level_page.Equals(_scenarioContext["level_update"].ToString()));
         }
 
 
+
+        [Then(@"The language is not updated")]
+        public void ThenTheLanguageIsNotUpdated()
+        {
+            Thread.Sleep(1000);
+            string language_page = _languagePage.getLastRowLanguage();
+            string level_page = _languagePage.getLastRowLevel();
+
+            Log.Information("the language is " + language_page + " the level is " + level_page);
+            Assert.IsTrue(language_page.Equals(_scenarioContext["language"].ToString()));
+            Assert.IsTrue(level_page.Equals(_scenarioContext["level"].ToString()));
+        }
+
+        [Given(@"Click the language AddNew Button")]
+        public void GivenClickTheLanguageAddNewButton()
+        {
+            _languagePage.ClickAddNewButton();
+        }
+
+        [When(@"Click the language Add button")]
+        public void WhenClickTheLanguageAddButton()
+        {
+            _languagePage.ClickAddButton();
+            row_count++;
+            _scenarioContext["language_count"] = row_count;
+
+        }
+
+        [When(@"Click the language cancel button")]
+        public void WhenClickTheLanguageCancelButton()
+        {
+            _languagePage.ClickCancelButton();
+        }
+
+        [When(@"Click the language delete icon")]
+        public void WhenClickTheLanguageDeleteIcon()
+        {
+            _languagePage.ClickDeleteIconOfALanguage(_scenarioContext["language"].ToString());
+        }
+
+
+        [When(@"Click the language edit icon")]
+        public void WhenClickTheLanguageEditIcon()
+        {
+            _languagePage.ClickEditIconOfALanguage(_scenarioContext["language"].ToString());
+        }
+
+
+        [When(@"Click language update button")]
+        public void WhenClickLanguageUpdateButton()
+        {
+            _languagePage.ClickUpdateButton();
+        }
     }
-}

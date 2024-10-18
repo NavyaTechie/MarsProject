@@ -1,4 +1,4 @@
-﻿﻿@NoBeforeFeature
+﻿﻿
 Feature: Homepage search function
 
   As a user, I want to search for skills on the market, so that I can view resources matching my skills and languages.

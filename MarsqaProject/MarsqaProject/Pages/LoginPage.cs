@@ -12,47 +12,34 @@ namespace MarsqaProject.Pages
 {
     public class LoginPage
     {
-        public readonly By signInButtonLocator = By.XPath("//A[@class='item'][text()='Sign In']");
+        private readonly IWebDriver _driver;
 
-        public readonly By emailTextBox = By.XPath("/html/body/div[2]/div/div/div[1]/div/div[1]/input");
-
-        public readonly By passwordTextBox = By.XPath("/html/body/div[2]/div/div/div[1]/div/div[2]/input");
-
-        public readonly By loginButton = By.XPath("/html/body/div[2]/div/div/div[1]/div/div[4]/button");
-
-        public readonly By errorMessageLocator = By.XPath("//div[@class='ui negative message']");
-        public void LoginActions(IWebDriver driver, string email, string password)
+        public LoginPage(IWebDriver driver)
         {
-            Wait.WaitToBeVisible(driver, emailTextBox);
-            Wait.WaitToBeVisible(driver, passwordTextBox);
-            driver.FindElement(emailTextBox).SendKeys(email);
-            driver.FindElement(passwordTextBox).SendKeys(password);
-            driver.FindElement(loginButton).Click();
+            _driver = driver;
         }
 
-        public bool IsLoginFailed(IWebDriver driver)
+        private IWebElement email_input => _driver.FindElement(By.XPath("//input[@name=\"email\"]"));
+        private IWebElement password_input => _driver.FindElement(By.XPath("//input[@name=\"password\"]"));
+        private IWebElement login_button => _driver.FindElement(By.XPath("//button[text()=\"Login\"]"));
+
+        public void ClickLoginButton(string email, string password)
         {
-            // Wait for the error message to be visible
-            try
-            {
-                Wait.WaitToBeVisible(driver, errorMessageLocator);
-                // Check if error message is displayed
-                return driver.FindElement(errorMessageLocator).Displayed;
-            }
-            catch (NoSuchElementException)
-            {
-                // If no error message, login did not fail
-                return false;
-            }
+
+            email_input.SendKeys(email);
+            password_input.SendKeys(password);
+            login_button.Click();
         }
-
-
-
-
-
-
-
-
-
     }
 }
+
+
+
+
+
+
+
+
+
+    
+

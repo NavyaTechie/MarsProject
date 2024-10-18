@@ -10,25 +10,31 @@ namespace MarsqaProject.Pages
 {
     public class SearchSkillPage
     {
+        private readonly IWebDriver _driver;
+        public SearchSkillPage(IWebDriver driver)
+        {
+            _driver = driver;
+        }
         public By seller_name;
         public By service_name;
-        public readonly By search_skill_input = By.XPath("");
-        public readonly By search_user_input = By.XPath("");
 
-        public void ClickSellerName(IWebDriver driver, string username)
+        public void ClickSellerName(string username)
         {
 
             seller_name = By.XPath("//a[@class=\"seller-info\"][text()=\"" + username + "\"]");
-            Wait.WaitToBeVisible(driver, seller_name);
-            driver.FindElement(seller_name).Click();
+            Wait.WaitToBeVisible(_driver, seller_name);
+            _driver.FindElement(seller_name).Click();
         }
 
-        public void CLickServiceName(IWebDriver driver, string serviceName)
+        public void CLickServiceName(string serviceName)
         {
 
             service_name = By.XPath("//a[@class=\"service-info\"]//p[text()=\"" + serviceName + "\"]");
-            Wait.WaitToBeVisible(driver, service_name);
-            driver.FindElement(service_name).Click();
+            Wait.WaitToBeVisible(_driver, service_name);
+            _driver.FindElement(service_name).Click();
+
         }
+
     }
 }
+

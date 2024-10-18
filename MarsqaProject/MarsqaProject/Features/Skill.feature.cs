@@ -20,13 +20,17 @@ namespace MarsqaProject.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Skill")]
-    public partial class SkillFeature
+    [NUnit.Framework.DescriptionAttribute("user can operate a skill")]
+    [NUnit.Framework.CategoryAttribute("﻿")]
+    [NUnit.Framework.CategoryAttribute("LoginRequired")]
+    public partial class UserCanOperateASkillFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private static string[] featureTags = ((string[])(null));
+        private static string[] featureTags = new string[] {
+                "﻿",
+                "LoginRequired"};
         
 #line 1 "Skill.feature"
 #line hidden
@@ -35,7 +39,7 @@ namespace MarsqaProject.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Skill", "User performing operations on the skill tab", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "user can operate a skill", null, ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -73,22 +77,25 @@ namespace MarsqaProject.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 54
+#line hidden
+#line 55
+ testRunner.Given("The data is clean up  and  Navigate to the skill tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("create a new skill")]
-        [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("C++", "Intermediate", "has been added to your skills", null)]
-        [NUnit.Framework.TestCaseAttribute("C++", "Beginner", "Duplicated data", null)]
-        [NUnit.Framework.TestCaseAttribute("", "Beginner", "Please enter skill and experience level.", null)]
-        [NUnit.Framework.TestCaseAttribute("C#", "", "Please enter skill and experience level.", null)]
-        [NUnit.Framework.TestCaseAttribute("C++", "Expert", "has been added to your skills", null)]
-        [NUnit.Framework.TestCaseAttribute("Java", "Beginner", "has been added to your skills", null)]
-        [NUnit.Framework.TestCaseAttribute("<script><Div></div></script>", "Intermediate", "has been added to your skills", null)]
-        [NUnit.Framework.TestCaseAttribute("/9874562&^#*%$^(*&@&@##^&@@&", "Intermediate", "has been added to your skills", null)]
-        [NUnit.Framework.TestCaseAttribute("", "Expert", "Please enter skill and experience level", null)]
-        public void CreateANewSkill(string skill, string level, string message, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("TC_002_Create a skill with valid value")]
+        [NUnit.Framework.CategoryAttribute("Positive")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
+        [NUnit.Framework.TestCaseAttribute("Java", "Beginner", null)]
+        public void TC_002_CreateASkillWithValidValue(string skill, string level, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "regression"};
+                    "Positive",
+                    "Regression"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -97,9 +104,8 @@ namespace MarsqaProject.Features
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("skill", skill);
             argumentsOfScenario.Add("level", level);
-            argumentsOfScenario.Add("message", message);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("create a new skill", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_002_Create a skill with valid value", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 58
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -109,33 +115,43 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
- testRunner.Given("navigate to the skills tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 54
+this.FeatureBackground();
 #line hidden
-#line 8
- testRunner.And("click the AddNew Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
+ testRunner.Given("click the AddNew Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 9
- testRunner.When(string.Format("input the \"{0}\" and \"{1}\" and click the add button", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 60
+testRunner.When(string.Format("Input the skill name \"{0}\" and level \"{1}\"", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 10
- testRunner.Then(string.Format("a \"{0}\" will be displayed to show the result", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 61
+ testRunner.And("Click the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 62
+ testRunner.Then("a skill is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("user cancel to create a new skill")]
-        [NUnit.Framework.TestCaseAttribute("C++", "Beginner", null)]
-        public void UserCancelToCreateANewSkill(string skill, string level, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("TC_003_Cancel to create a new skill with valid value")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
+        [NUnit.Framework.TestCaseAttribute("Java", "Beginner", null)]
+        public void TC_003_CancelToCreateANewSkillWithValidValue(string skill, string level, string[] exampleTags)
         {
-            string[] tagsOfScenario = exampleTags;
+            string[] @__tags = new string[] {
+                    "Regression"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("skill", skill);
             argumentsOfScenario.Add("level", level);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("user cancel to create a new skill", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 25
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_003_Cancel to create a new skill with valid value", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 68
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -145,16 +161,110 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 26
- testRunner.Given("navigate to the skills tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 54
+this.FeatureBackground();
 #line hidden
-#line 27
- testRunner.And("click the AddNew Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 69
+ testRunner.Given("click the AddNew Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 28
- testRunner.When(string.Format("input the \"{0}\" and \"{1}\" and click the cancel button", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 70
+testRunner.When(string.Format("Input the skill name \"{0}\" and level \"{1}\"", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 29
+#line 71
+ testRunner.And("click the cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 72
+ testRunner.Then("no skill is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("TC_004_Create new skill with empty value")]
+        [NUnit.Framework.CategoryAttribute("Negative")]
+        [NUnit.Framework.TestCaseAttribute("", "Beginner", null)]
+        [NUnit.Framework.TestCaseAttribute("Java", "Choose Skill Level", null)]
+        public void TC_004_CreateNewSkillWithEmptyValue(string skill, string level, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Negative"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("skill", skill);
+            argumentsOfScenario.Add("level", level);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_004_Create new skill with empty value", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 78
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 54
+this.FeatureBackground();
+#line hidden
+#line 79
+ testRunner.Given("click the AddNew Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 80
+testRunner.When(string.Format("Input the skill name \"{0}\" and level \"{1}\"", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 81
+ testRunner.Then("no skill is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("TC_005_Duplicate skillName with same level")]
+        [NUnit.Framework.CategoryAttribute("Negative")]
+        public void TC_005_DuplicateSkillNameWithSameLevel()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Negative"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_005_Duplicate skillName with same level", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 88
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 54
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skill",
+                            "level"});
+                table12.AddRow(new string[] {
+                            "Java",
+                            "Beginner"});
+#line 89
+ testRunner.Given("add a skill succeed", ((string)(null)), table12, "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skill",
+                            "level"});
+                table13.AddRow(new string[] {
+                            "Java",
+                            "Beginner"});
+#line 92
+ testRunner.When("add another skill", ((string)(null)), table13, "When ");
+#line hidden
+#line 95
  testRunner.Then("no more skill is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -162,20 +272,15 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("user can update a skill")]
-        [NUnit.Framework.TestCaseAttribute("C#", "Python", "Expert", "has been updated to your skills", null)]
-        [NUnit.Framework.TestCaseAttribute("Java", "Python", "Expert", "is already added to your skill list", null)]
-        [NUnit.Framework.TestCaseAttribute("C++", "C#", "Intermediate", "This skill is already added to your skill list", null)]
-        public void UserCanUpdateASkill(string skill, string skillname, string level, string message, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("TC_006_Skill name Case Sensitivity")]
+        [NUnit.Framework.CategoryAttribute("Negative")]
+        public void TC_006_SkillNameCaseSensitivity()
         {
-            string[] tagsOfScenario = exampleTags;
+            string[] tagsOfScenario = new string[] {
+                    "Negative"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("skill", skill);
-            argumentsOfScenario.Add("skillname", skillname);
-            argumentsOfScenario.Add("level", level);
-            argumentsOfScenario.Add("message", message);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("user can update a skill", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 34
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_006_Skill name Case Sensitivity", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 98
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -185,33 +290,54 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 35
- testRunner.Given("navigate to the skills tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 54
+this.FeatureBackground();
 #line hidden
-#line 36
- testRunner.And(string.Format("click the edit button of a \"{0}\"", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skill",
+                            "level"});
+                table14.AddRow(new string[] {
+                            "Java",
+                            "Beginner"});
+#line 99
+ testRunner.Given("add a skill succeed", ((string)(null)), table14, "Given ");
 #line hidden
-#line 37
- testRunner.When(string.Format("change the \"<skill_name>\"\"{0}\" and click Update button", level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skill",
+                            "level"});
+                table15.AddRow(new string[] {
+                            "java",
+                            "Beginner"});
+#line 102
+ testRunner.When("add another skill", ((string)(null)), table15, "When ");
 #line hidden
-#line 38
- testRunner.Then(string.Format("a \"{0}\" will be displayed to show the result", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 105
+ testRunner.Then("no more skill is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("user can delete a skill")]
-        [NUnit.Framework.TestCaseAttribute("C#", "has been deleted", null)]
-        public void UserCanDeleteASkill(string skill, string message, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("TC_007_Create a new skill with special symbols")]
+        [NUnit.Framework.CategoryAttribute("Negative")]
+        [NUnit.Framework.CategoryAttribute("Destructive")]
+        [NUnit.Framework.TestCaseAttribute("$#&%&*&* \\;\'.khkjh", "Beginner", null)]
+        public void TC_007_CreateANewSkillWithSpecialSymbols(string skill, string level, string[] exampleTags)
         {
-            string[] tagsOfScenario = exampleTags;
+            string[] @__tags = new string[] {
+                    "Negative",
+                    "Destructive"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("skill", skill);
-            argumentsOfScenario.Add("message", message);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("user can delete a skill", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 45
+            argumentsOfScenario.Add("level", level);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_007_Create a new skill with special symbols", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 108
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -221,14 +347,358 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 46
- testRunner.Given("navigate to the skills tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 54
+this.FeatureBackground();
 #line hidden
-#line 47
- testRunner.When(string.Format("click the delete button of a \"{0}\"", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 109
+ testRunner.Given("click the AddNew Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 48
- testRunner.Then(string.Format("a \"{0}\" will be displayed to show the result", message), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 110
+ testRunner.When(string.Format("Input the skill name \"{0}\" and level \"{1}\"", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 111
+ testRunner.And("Click the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 112
+ testRunner.Then("skill is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("TC_008_SQL Injection in skill name")]
+        [NUnit.Framework.CategoryAttribute("Negative")]
+        [NUnit.Framework.CategoryAttribute("Destructive")]
+        [NUnit.Framework.TestCaseAttribute("\"\' OR 1=1; -- \"", "Beginner", null)]
+        public void TC_008_SQLInjectionInSkillName(string skill, string level, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Negative",
+                    "Destructive"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("skill", skill);
+            argumentsOfScenario.Add("level", level);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_008_SQL Injection in skill name", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 119
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 54
+this.FeatureBackground();
+#line hidden
+#line 120
+ testRunner.Given("click the AddNew Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 121
+ testRunner.When(string.Format("Input the skill name \"{0}\" and level \"{1}\"", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 122
+ testRunner.And("Click the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 123
+ testRunner.Then("skill is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("TC_009_Script Injection in Skill name")]
+        [NUnit.Framework.CategoryAttribute("Negative")]
+        [NUnit.Framework.CategoryAttribute("Destructive")]
+        [NUnit.Framework.TestCaseAttribute("\"<script>alert(\'XSS\')</script>\"", "Beginner", null)]
+        public void TC_009_ScriptInjectionInSkillName(string skill, string level, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Negative",
+                    "Destructive"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("skill", skill);
+            argumentsOfScenario.Add("level", level);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_009_Script Injection in Skill name", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 129
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 54
+this.FeatureBackground();
+#line hidden
+#line 130
+ testRunner.Given("click the AddNew Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 131
+ testRunner.When(string.Format("Input the skill name \"{0}\" and level \"{1}\"", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 132
+ testRunner.And("Click the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 133
+ testRunner.Then("skill is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("TC_010_Extremely long Language name")]
+        [NUnit.Framework.CategoryAttribute("Negative")]
+        [NUnit.Framework.CategoryAttribute("Destructive")]
+        [NUnit.Framework.TestCaseAttribute("(10,000 \'a\' characters)", "Beginner", null)]
+        public void TC_010_ExtremelyLongLanguageName(string skill, string level, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Negative",
+                    "Destructive"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("skill", skill);
+            argumentsOfScenario.Add("level", level);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_010_Extremely long Language name", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 140
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 54
+this.FeatureBackground();
+#line hidden
+#line 141
+ testRunner.Given("click the AddNew Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 142
+ testRunner.When(string.Format("Input the skill name \"{0}\" and level \"{1}\"", skill, level), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 143
+ testRunner.And("Click the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 144
+ testRunner.Then("skill is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("TC_011_Delete a skill")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
+        public void TC_011_DeleteASkill()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Regression"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_011_Delete a skill", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 150
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 54
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skill",
+                            "level"});
+                table16.AddRow(new string[] {
+                            "Java",
+                            "Beginner"});
+#line 151
+ testRunner.Given("add a skill succeed", ((string)(null)), table16, "Given ");
+#line hidden
+#line 154
+ testRunner.When("click the delete icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 155
+ testRunner.Then("the skill will be delete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("TC_012_Update a skill with new name")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
+        public void TC_012_UpdateASkillWithNewName()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Regression"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_012_Update a skill with new name", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 159
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 54
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skill",
+                            "level"});
+                table17.AddRow(new string[] {
+                            "Java",
+                            "Beginner"});
+#line 160
+ testRunner.Given("add a skill succeed", ((string)(null)), table17, "Given ");
+#line hidden
+#line 163
+ testRunner.When("click the edit icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skill",
+                            "level"});
+                table18.AddRow(new string[] {
+                            "C#",
+                            "Expert"});
+#line 164
+ testRunner.And("update the skill with below data", ((string)(null)), table18, "And ");
+#line hidden
+#line 167
+ testRunner.And("click update button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 168
+ testRunner.Then("the skill is updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("TC_013_Cancel to update a skill")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
+        public void TC_013_CancelToUpdateASkill()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Regression"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_013_Cancel to update a skill", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 171
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 54
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skill",
+                            "level"});
+                table19.AddRow(new string[] {
+                            "Java",
+                            "Beginner"});
+#line 172
+ testRunner.Given("add a skill succeed", ((string)(null)), table19, "Given ");
+#line hidden
+#line 175
+ testRunner.When("click the edit icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skill",
+                            "level"});
+                table20.AddRow(new string[] {
+                            "C#",
+                            "Expert"});
+#line 176
+ testRunner.And("update the skill with below data", ((string)(null)), table20, "And ");
+#line hidden
+#line 179
+ testRunner.And("click the cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 180
+ testRunner.Then("the skill is not updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("TC_001_View the skill list")]
+        [NUnit.Framework.CategoryAttribute("Regression")]
+        public void TC_001_ViewTheSkillList()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Regression"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("TC_001_View the skill list", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 183
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 54
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                            "skill",
+                            "level"});
+                table21.AddRow(new string[] {
+                            "Java",
+                            "Beginner"});
+                table21.AddRow(new string[] {
+                            "C#",
+                            "Expert"});
+                table21.AddRow(new string[] {
+                            "JS",
+                            "Intermediate"});
+#line 184
+ testRunner.Given("add a skill succeed", ((string)(null)), table21, "Given ");
+#line hidden
+#line 189
+ testRunner.When("I click the skill tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 190
+ testRunner.Then("I should see the skill list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

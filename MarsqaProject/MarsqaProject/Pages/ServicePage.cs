@@ -10,12 +10,19 @@ namespace MarsqaProject.Pages
 {
     public class ServicePage
     {
-        public readonly By service_name = By.XPath("//span[@class = \"skill-title\"]");
-
-        public string GetSkillTitle(IWebDriver driver)
+        private readonly IWebDriver _driver;
+        public ServicePage(IWebDriver driver)
         {
-            Wait.WaitToBeVisible(driver, service_name);
-            return driver.FindElement(service_name).Text;
+            _driver = driver;
         }
+
+
+        private IWebElement service_name => _driver.FindElement(By.XPath("//span[@class = \"skill-title\"]"));
+        public string GetSkillTitle()
+        {
+
+            return service_name.Text;
+        }
+        
     }
 }

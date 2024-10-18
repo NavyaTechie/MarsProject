@@ -10,43 +10,94 @@ namespace MarsqaProject.Pages
 {
     public class LanguagePage
     {
-        public readonly By languageTab = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[1]/a[1]");
-
-        public readonly By addLanguageTextBox = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[1]/input");
-        public readonly By levelDropdown = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[2]/select");
-
-        public readonly By addNewButton = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div");
-        public readonly By addButton = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[1]");
-        public readonly By cancelButton = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[2]");
-        public By? languageLevelOption;
-        
-        public By lastrowLanguage = By.XPath("//tr[last()]//td[1]");
-        public By lastrowLevel = By.XPath("//tr[last()]//td[2]");
-
-        public By? editButton;// By.XPath("//td[text()='Mandarin']/following-sibling::td[@class='right aligned']//i[@class='outline write icon']");
-        public By? deleteButton;// By.XPath("//td[text()='Mandarin']/following-sibling::td[@class='right aligned']//i[@class='remove icon']");
-
-
-
-        public By updateButton = By.XPath("//div[@data-tab=\"first\"]//input[@value=\"Update\"]");
-
-        public By activeTab = By.XPath("//div[contains(@class, 'ui bottom attached tab segment') and contains(@class, 'active')]");
-
-
-        public void NavigateToLanguageTab(IWebDriver driver)
+        private readonly IWebDriver _driver;
+        public LanguagePage(IWebDriver driver)
         {
-
-
-            Wait.WaitToBeVisible(driver, languageTab);
-            driver.FindElement(languageTab).Click();
-        }
-        public void ClickAddNewButton(IWebDriver driver)
-        {
-            //Wait.WaitToBeVisible(driver, language_addNew_button);
-            driver.FindElement(addLanguageTextBox).Click();
+            _driver = driver;
         }
 
-        public void EnterNewLanguage(IWebDriver driver, string type, string language, string level)
+        public readonly By language_tab = By.XPath("//a[text()=\"Languages\"]");
+
+        public readonly By languange_question_text = By.XPath("//div[contains(text(), 'How many languages do you speak?')]");
+
+        public readonly By add_language_input = By.XPath("//input[@placeholder=\"Add Language\"]");
+        public readonly By language_level_dropdown = By.XPath("//select[@name=\"level\"]");
+
+        public readonly By language_addNew_button = By.XPath("//div[@data-tab=\"first\"]//div[@class=\"ui teal button \"]");
+        public readonly By add_button = By.XPath("//div[@data-tab=\"first\"]//input[@value=\"Add\"]");
+        public readonly By cancel_button = By.XPath("//div[@data-tab=\"first\"]//input[@value=\"Cancel\"]");
+        public By language_level_option;
+        public By lastrow_Language = By.XPath("//table[@class='ui fixed table']/tbody[last()]/tr[last()]/td[1]");
+        public By lastrow_level = By.XPath("//table[@class='ui fixed table']/tbody[last()]/tr[last()]/td[2]");
+
+        public By edit_button;// By.XPath("//td[text()='Mandarin']/following-sibling::td[@class='right aligned']//i[@class='outline write icon']");
+        public By delete_button;// By.XPath("//td[text()='Mandarin']/following-sibling::td[@class='right aligned']//i[@class='remove icon']");
+
+
+
+        public By update_button = By.XPath("//div[@data-tab=\"first\"]//input[@value=\"Update\"]");
+
+        public By active_tab = By.XPath("//div[contains(@class, 'ui bottom attached tab segment') and contains(@class, 'active')]");
+        public By message_close_button = By.XPath("//a[@class=\"ns-close\"]");
+
+
+        public void RefreshPage()
+        {
+            _driver.Navigate().Refresh();
+        }
+        public void ClickMessageCloseButton()
+        {
+            Wait.WaitToBeVisible(_driver, message_close_button);
+            try
+            {
+                IWebElement ele = _driver.FindElement(message_close_button);
+                if (ele != null)
+                {
+                    ele.Click();
+                }
+            }
+            catch (StaleElementReferenceException)
+            {
+                // Handle the case where the element is stale and re-fetch
+                Log.Information("Stale element, refreshing collection...");
+            }
+
+
+        }
+
+        public void NavigateToLanguageTab()
+        {
+            Wait.WaitToBeClickable(_driver, language_tab);
+            _driver.FindElement(language_tab).Click();
+        }
+        public void ClickAddNewButton()
+        {
+            Wait.WaitToBeClickable(_driver, language_addNew_button);
+            _driver.FindElement(language_addNew_button).Click();
+        }
+
+        public bool AddBewButtonIsVisible()
+        {
+            if (language_addNew_button != null)
+            {
+                try
+                {
+                    IWebElement addNewButton = _driver.FindElement(language_addNew_button);
+                    return true;
+                }
+                catch (NoSuchElementException ex)
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public void InputNewLanguageDetails(string type, string language, string level)
         {
             if (level == "" || level == null)
             {
@@ -54,77 +105,110 @@ namespace MarsqaProject.Pages
             }
             if (type == "new")
             {
-                driver.FindElement(addLanguageTextBox).SendKeys(language);
-                driver.FindElement(levelDropdown).Click();
-                languageLevelOption = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
-                driver.FindElement(languageLevelOption).Click();
+                _driver.FindElement(add_language_input).SendKeys(language);
+                _driver.FindElement(language_level_dropdown).Click();
+                language_level_option = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
+                _driver.FindElement(language_level_option).Click();
             }
             else if (type == "edit")
             {
-                driver.FindElement(addLanguageTextBox).Clear();
-                driver.FindElement(addLanguageTextBox).SendKeys(language);
-                driver.FindElement(levelDropdown).Click();
-                languageLevelOption = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
-                driver.FindElement(languageLevelOption).Click();
+                _driver.FindElement(add_language_input).Clear();
+                _driver.FindElement(add_language_input).SendKeys(language);
+                _driver.FindElement(language_level_dropdown).Click();
+                language_level_option = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
+                _driver.FindElement(language_level_option).Click();
             }
 
         }
 
-        public void ClickAddButton(IWebDriver driver)
+        public void ClickAddButton()
         {
-            driver.FindElement(addButton).Click();
+            _driver.FindElement(add_button).Click();
         }
 
-        public string getLastRowLanguage(IWebDriver driver)
+        public string getLastRowLanguage()
         {
-            return driver.FindElement(lastrowLanguage).Text;
+            Wait.WaitToBeVisible(_driver, lastrow_Language);
+            return _driver.FindElement(lastrow_Language).Text;
         }
 
-        public string getLastRowLevel(IWebDriver driver)
+        public string getLastRowLevel()
         {
-            return driver.FindElement(lastrowLevel).Text;
+            Wait.WaitToBeVisible(_driver, lastrow_level);
+            return _driver.FindElement(lastrow_level).Text;
         }
-        public void ClickCancelButton(IWebDriver driver)
+        public void ClickCancelButton()
         {
-            driver.FindElement(cancelButton).Click();
+            _driver.FindElement(cancel_button).Click();
         }
-        public int GetRowCount(IWebDriver driver, string type)
+        public int GetLanguageCount()
         {
-            driver.FindElement(languageTab).Click();
-            IWebElement _active_tab = driver.FindElement(activeTab);
+            _driver.FindElement(language_tab).Click();
+            Wait.WaitToBeVisible(_driver, active_tab);
+            IWebElement _active_tab = _driver.FindElement(active_tab);
             By row = By.XPath(".//table[contains(@class, 'ui fixed table')]//tbody//tr");
             IReadOnlyCollection<IWebElement> rows = _active_tab.FindElements(row);
             int _count = rows.Count;
-            Console.WriteLine($"Row count in the active tab: {_count}");
             return _count;
         }
 
-        public void ClickEditIconOfALanguage(IWebDriver driver, string language)
+
+        public void ClickEditIconOfALanguage(string language)
         {
-            editButton = By.XPath("//td[text()='" + language + "']/following-sibling::td[@class='right aligned']//i[@class='outline write icon']");
-            driver.FindElement(editButton).Click();
+            edit_button = By.XPath("//td[text()='" + language + "']/following-sibling::td[@class='right aligned']//i[@class='outline write icon']");
+            _driver.FindElement(edit_button).Click();
         }
 
-        public void ClickDeleteIconOfALanguage(IWebDriver driver, string language)
+        public void ClickDeleteIconOfALanguage(string language)
         {
-            deleteButton = By.XPath("//td[text()='" + language + "']/following-sibling::td[@class='right aligned']//i[@class='remove icon']");
-            driver.FindElement(deleteButton).Click();
+            delete_button = By.XPath("//td[text()='" + language + "']/following-sibling::td[@class='right aligned']//i[@class='remove icon']");
+            _driver.FindElement(delete_button).Click();
         }
 
-        public void ClickUpdateButton(IWebDriver driver)
+        public void ClickUpdateButton()
         {
-            driver.FindElement(updateButton).Click();
+            _driver.FindElement(update_button).Click();
         }
 
-        public void ClearUpAllTheData(IWebDriver driver)
+        public void ClearUpAllTheData()
         {
-            IReadOnlyCollection<IWebElement> removeIcon = driver.FindElements(By.XPath("//div[@data-tab=\"first\"]//i[@class=\"remove icon\"]"));
-            foreach (IWebElement icon in removeIcon)
+            try
             {
-                icon.Click();
+                IReadOnlyCollection<IWebElement> removeIcons = _driver.FindElements(By.XPath("//div[@data-tab='first']//i[@class='remove icon']"));
+                while (removeIcons.Count > 0)
+                {
+                    foreach (IWebElement icon in removeIcons.ToList())
+                    {
+                        try
+                        {
+                            // Click on the remove icon
+                            Wait.WaitToBeClickable(_driver, icon);
+                            icon.Click();
+
+
+                        }
+                        catch (StaleElementReferenceException)
+                        {
+                            // Handle the case where the element is stale and re-fetch
+                            Log.Information("Stale element, refreshing collection...");
+                        }
+                    }
+
+                    // Re-fetch the list of remove icons, as they may have changed after each click
+                    removeIcons = _driver.FindElements(By.XPath("//div[@data-tab='first']//i[@class='remove icon']"));
+                }
+
+                // Refresh the page after clearing all the elements
+                _driver.Navigate().Refresh();
             }
-            driver.Navigate().Refresh();
+            catch (Exception ex)
+            {
+                Log.Information($"An error occurred while clearing the data: {ex.Message}");
+            }
         }
+
+
 
     }
+}
 }

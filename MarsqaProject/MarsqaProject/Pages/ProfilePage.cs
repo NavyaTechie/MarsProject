@@ -10,130 +10,46 @@ namespace MarsqaProject.Pages
 {
     public class ProfilePage
     {
-        
-        
-        public readonly By languageTab = By.XPath("//a[text()=\"Languages\"]");
-       
-        public readonly By addLanguageTextBox = By.XPath("//input[@placeholder=\"Add Language\"]");
-        public readonly By languageLevelDropdown = By.XPath("//select[@name=\"level\"]");
-        
-        public readonly By languageAddNewButton = By.XPath("//div[@data-tab=\"first\"]//div[@class=\"ui teal button \"]");
-        public readonly By addButton =By.XPath("//div[@data-tab=\"first\"]//input[@value=\"Add\"]");
-        public readonly By cancelButton = By.XPath("//div[@data-tab=\"first\"]//input[@value=\"Cancel\"]");
-        public By lastrowLanguage = By.XPath("//tr[last()]//td[1]");
-        public By lastrowLevel = By.XPath("//tr[last()]//td[2]");
+        private readonly IWebDriver _driver;
+        public ProfilePage(IWebDriver driver)
+        {
+            _driver = driver;
+        }
 
-        public By? editButton;
-        public By? deleteButton;
-        public By? languageLevelOption;
-
-        public By messageDiv =By.XPath("//div[@class=\"ns-box-inner\"]");
-
-        public By updateButton = By.XPath("//div[@data-tab=\"first\"]//input[@value=\"Update\"]");
-
-        public By activeTab = By.XPath("//div[contains(@class, 'ui bottom attached tab segment') and contains(@class, 'active')]");
+        public By service_tab = By.XPath("//a[text()=\"Services\"]");
+        public By language_tab = By.XPath("//a[text()=\"Services\"]");
+        public By skill_tab = By.XPath("//a[text()=\"Skills\"]");
+        public By message_div = By.XPath("//div[@class=\"ns-box-inner\"]");
         public By message_close_button = By.XPath("//a[@class=\"ns-close\"]");
 
-        public void NavigateToLanguageTab(IWebDriver driver)
+        public void ClickLanguagesTab()
         {
-
-
-            Wait.WaitToBeVisible(driver, languageTab);
-            driver.FindElement(languageTab).Click();
+            Wait.WaitToBeVisible(_driver, language_tab);
+            _driver.FindElement(language_tab).Click();
         }
-        public void ClickAddNewButton(IWebDriver driver)
+        public void ClickSkillsTab()
         {
-            Wait.WaitToBeVisible(driver, languageAddNewButton);
-            driver.FindElement(languageAddNewButton).Click();
-        }
+            Wait.WaitToBeVisible(_driver, skill_tab);
 
-        public void InputNewLanguageDetails(IWebDriver driver, string type, string language, string level)
+            _driver.FindElement(skill_tab).Click();
+        }
+        public void ClickServicesTab()
         {
-            if (type == "new")
-            {
-                driver.FindElement(addLanguageTextBox).SendKeys(language);
-                driver.FindElement(languageLevelDropdown).Click();
-                languageLevelOption = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
-                driver.FindElement(languageLevelOption).Click();
-            }
-            else if (type == "edit")
-            {
-                driver.FindElement(addLanguageTextBox).Clear();
-                driver.FindElement(addLanguageTextBox).SendKeys(language);
-                driver.FindElement(languageLevelDropdown).Click();
-                languageLevelOption = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
-                driver.FindElement(languageLevelOption).Click();
-            }
+            Wait.WaitToBeVisible(_driver, service_tab);
+            _driver.FindElement(service_tab).Click();
 
         }
 
-        public void ClickAddButton(IWebDriver driver)
+        public string GetMessage()
         {
-            driver.FindElement(addButton).Click();
-        }
-
-        public string getLastRowLanguage(IWebDriver driver)
-        {
-            return driver.FindElement(lastrowLanguage).Text;
-        }
-
-        public string getLastRowLevel(IWebDriver driver)
-        {
-            return driver.FindElement(lastrowLevel).Text;
-        }
-        public void ClickCancelButton(IWebDriver driver)
-        {
-            driver.FindElement(cancelButton).Click();
-        }
-        public int GetRowCount(IWebDriver driver, string type)
-        {
-            driver.FindElement(languageTab).Click();
-            IWebElement _active_tab = driver.FindElement(activeTab);
-            By row = By.XPath(".//table[contains(@class, 'ui fixed table')]//tbody//tr");
-            IReadOnlyCollection<IWebElement> rows = _active_tab.FindElements(row);
-            int _count = rows.Count;
-            Console.WriteLine($"Row count in the active tab: {_count}");
-            return _count;
-        }
-
-        public void ClickEditIconOfALanguage(IWebDriver driver, string language)
-        {
-            editButton = By.XPath("//td[text()='" + language + "']/following-sibling::td[@class='right aligned']//i[@class='outline write icon']");
-            driver.FindElement(editButton).Click();
-        }
-
-        public void ClickDeleteIconOfALanguage(IWebDriver driver, string language)
-        {
-            deleteButton = By.XPath("//td[text()='" + language + "']/following-sibling::td[@class='right aligned']//i[@class='remove icon']");
-            driver.FindElement(deleteButton).Click();
-        }
-
-        public void ClickUpdateButton(IWebDriver driver)
-        {
-            driver.FindElement(updateButton).Click();
-        }
-
-        public void ClearUpAllTheData(IWebDriver driver)
-        {
-            IReadOnlyCollection<IWebElement> remove_icon = driver.FindElements(By.XPath("//div[@data-tab=\"first\"]//i[@class=\"remove icon\"]"));
-            foreach (IWebElement icon in remove_icon)
-            {
-                icon.Click();
-            }
-            driver.Navigate().Refresh();
-
-        }
-        public string GetMessage(IWebDriver driver)
-        {
-            Wait.WaitToBeVisible(driver, messageDiv);
-            string message = driver.FindElement(messageDiv).Text;
-            Console.WriteLine(message);
+            string message = _driver.FindElement(message_div).Text;
+            Log.Information(message);
             return message;
         }
-        public void ClickMessageCloseButton(IWebDriver driver)
-        {
-            driver.FindElement(message_close_button).Click();
-        }
-    }
-}
 
+        public void ClickMessageCloseButton()
+        {
+            _driver.FindElement(message_close_button).Click();
+        }    
+    }
+    }

@@ -12,111 +12,90 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
+
 
 namespace MarsqaProject.Utilities
 {
-    public class BasicTests:CommonDriver 
+    public class BasicTests : ExtentReport
     {
 
-        public static IWebDriver driver;
-        public readonly FeatureContext _featureContext;
-        LoginPage loginPage = new LoginPage();
-        LanguagePage languagePage = new LanguagePage();
-        SkillPage skillPage = new SkillPage();
-        private static object configPath;
+        private IWebDriver _driver;
+        private LoginPage _loginPage;
+        protected readonly FeatureContext _featureContext;
 
-        public BasicTests(FeatureContext featureContext)
+        public BasicTests(IWebDriver driver, FeatureContext featureContext)
         {
-
+            _driver = driver;
+            _loginPage = new LoginPage(_driver);
             _featureContext = featureContext;
-        }
-
-        public static IWebDriver GetWebDriver(IWebDriver? driver)
-        {
-            if (driver == null)
-            {
-                GetNewWebDriver();
-            }
-            return driver;
-        }
-
-        public static void GetNewWebDriver()
-        {
-            string browserType = GetApplicationConfig("browserType");
-            switch (browserType.ToLower())
-            {
-                case "chrome":
-                    new DriverManager().SetUpDriver(new ChromeConfig());
-                    driver = new ChromeDriver();
-                    break;
-                case "firefox":
-                    driver = new FirefoxDriver();
-                    break;
-                case "edge":
-                    driver = new EdgeDriver();
-                    break;
-                default:
-                    driver = new ChromeDriver();
-                    break;
-
-            }
-            driver.Manage().Window.Maximize();
-        }
-        public static string GetApplicationConfig(string key)
-        {
-            try
-            {
-                // Construct the path to the config file
-                string configPath = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory + "../../../").FullName, "ConfigFile", "specflow.json");
-
-                // Read the contents of the file
-                string jsonContent = File.ReadAllText(configPath);
-
-                // Parse the JSON
-                JObject jsonData = JObject.Parse(jsonContent);
-
-                // Check if the key exists
-                if (jsonData[key] != null)
-                {
-                    return jsonData[key].ToString();
-                }
-                else
-                {
-                    throw new KeyNotFoundException($"Key '{key}' not found in the config file.");
-                }
-            }
-            catch (FileNotFoundException ex)
-            {
-                throw new FileNotFoundException($"The configuration file was not found at {configPath}.", ex);
-            }
-            catch (JsonException ex)
-            {
-                throw new JsonException("Failed to parse the configuration file.", ex);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("An error occurred while retrieving the configuration.", ex);
-            }
         }
 
         public bool IsUserLoggedIn()
         {
             return _featureContext.ContainsKey("IsLoggedIn") && (bool)_featureContext["IsLoggedIn"];
-
         }
 
         public void SetUserLoggedIn(bool isLoggedIn)
         {
             _featureContext["IsLoggedIn"] = isLoggedIn;
         }
-
-        public static void PerformLogin()
+        public IWebDriver GetWebDriver()
         {
-            string email = GetApplicationConfig("username");
-            string password = GetApplicationConfig("password");
-            LoginPage loginPage = new LoginPage();
-            loginPage.LoginActions(driver, email, password);
+            if (_driver == null)
+            {
+                GetNewWebDriver();
+            }
+            return _driver;
         }
+
+        public void GetNewWebDriver()
+        {
+            string browserType = GetAppConfig("browserType");
+            switch (browserType.ToLower())
+            {
+                case "chrome":
+                    new DriverManager().SetUpDriver(new ChromeConfig());
+                    _driver = new ChromeDriver();
+                    break;
+                case "firefox":
+                    _driver = new FirefoxDriver();
+                    break;
+                case "edge":
+                    _driver = new EdgeDriver();
+                    break;
+                default:
+                    _driver = new ChromeDriver();
+                    break;
+
+            }
+            _driver.Manage().Window.Maximize();
+        }
+        public string GetAppConfig(string key)
+        {
+            //get AppConfig.json directory
+
+            string configPath = System.IO.Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory + "../../../").FullName
+                  + "\\Config\\AppConfig.json";
+
+            if (!File.Exists(configPath))
+            {
+                throw new FileNotFoundException("Config file not found:" + configPath);
+            }
+            string jsonContent = File.ReadAllText(configPath);
+            JObject jsonData = JObject.Parse(jsonContent);
+            return jsonData[key]?.ToString() ?? throw new KeyNotFoundException($"Key '{key}' not found in config");
+        }
+
+
+        public void PerformLogin()
+        {
+            string email = GetAppConfig("username");
+            string password = GetAppConfig("password");
+            _loginPage.ClickLoginButton(email, password);
+        }
+
     }
 }
 

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace MarsqaProject.Utilities
 {
-    public class StartUpLog
+    public class Logger
     {
         public static void InitializeLogger()
         {

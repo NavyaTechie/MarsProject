@@ -17,100 +17,51 @@ namespace MarsqaProject.StepDefinition
 
     public class LoginStepDefinition : BasicTests
     {
-        HomePage homePage;
-        public IWebDriver driver;
-        public LoginPage loginPage;
-        public LoginStepDefinition(FeatureContext featureContext) : base(featureContext)
+        private readonly IWebDriver _driver;
+        private readonly LoginPage _loginPage;
+        private readonly HomePage _homePage;
+
+
+        public LoginStepDefinition(IWebDriver driver, FeatureContext featureContext) : base(driver, featureContext)
         {
+            _driver = driver;
+            _loginPage = new LoginPage(_driver);
+            _homePage = new HomePage(_driver);
         }
 
         [Given(@"navigates to the login page")]
         public void GivenNavigatesToTheLoginPage()
         {
-            string url = GetApplicationConfig("url");
-            driver.Navigate().GoToUrl(url);
-           // driver = new ChromeDriver();
-            homePage = new HomePage();
-            homePage.ClickOnSignInLink(driver);
-
+            string url = GetAppConfig("url");
+            _driver.Navigate().GoToUrl(url);
+            _homePage.ClickSignInLink();
         }
 
         [When(@"enter valid credentials and click the login button")]
         public void WhenEnterValidCredentialsAndClickTheLoginButton()
         {
-             if (!IsUserLoggedIn())
-            {
-                PerformLogin();
-                SetUserLoggedIn(true);
-                Console.WriteLine("User logged in successfully.");
-            }
-            else
-            {
-                Console.WriteLine("User is already logged in, skipping login.");
-            }
-            
-
-           /* string email = GetApplictionConfig("username");
-            string password = GetApplictionConfig("password");
-            loginPage = new LoginPage();
-            loginPage.ClickLoginButton(driver, email, password);
-           */
-
-        }
-
-        [Then(@"should be redirected to the profile page")]
-        public void ThenShouldBeRedirectedToTheProfilePage(string profileUrl)
-        {
-            string expectedProfileUrl = GetApplicationConfig("profileUrl");
-            string currentUrl = driver.Url;
-
-            // Use Assert.AreEqual to compare the two URLs
-            Assert.ReferenceEquals(expectedProfileUrl, currentUrl, "The user is not redirected to the profile page.");
-
-            // Verify if the user is logged in
-            Assert.Pass(IsUserLoggedIn(), "User login failed.");
-        }
-
-        [When(@"enter valid credentials and click the login button")]
-        public void WhenEnterValidCredentials()
-        {
-            
+            /* if (!IsUserLoggedIn())
+             {
+                 PerformLogin();
+                 SetUserLoggedIn(true);
+                 Console.WriteLine("User logged in successfully.");
+             }
+             else
+             {
+                 Console.WriteLine("User is already logged in, skipping login.");
+             }*/
+            PerformLogin();
         }
 
         [Then(@"should be redirected to the profile page")]
         public void ThenShouldBeRedirectedToTheProfilePage()
         {
-            throw new PendingStepException();
+
+            string profileUrl = GetAppConfig("profileUrl");
+            string currentUrl = _driver.Url;
+            Assert.True(profileUrl.Equals(currentUrl));
+            // Assert.IsTrue(IsUserLoggedIn(),"user logged in succeeded");
         }
-
-        [When(@"I enter an invalid email ""([^""]*)""")]
-        public void WhenIEnterAnInvalidEmail(string email)
-        {
-            loginPage.LoginActions(driver, email, "");
-        }
-
-        [When(@"I enter an invalid password ""([^""]*)""")]
-        public void WhenIEnterAnInvalidPassword(string password)
-        {
-            loginPage.LoginActions(driver, "", password);
-        }
-
-        [When(@"I click on the login button")]
-        public void WhenIClickOnTheLoginButton()
-        {
-            driver.FindElement(loginPage.loginButton).Click();
-        }
-
-        [Then(@"I should see an error message ""([^""]*)""")]
-        public void ThenIShouldSeeAnErrorMessage(string expectedErrorMessage)
-        {
-            bool isErrorMessageDisplayed = loginPage.IsLoginFailed(driver);
-            Assert.Equals(isErrorMessageDisplayed, "Error message was not displayed.");
-            driver.Quit();
-        }
-
-
-
 
     }
 }

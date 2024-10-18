@@ -8,107 +8,126 @@ using System.Threading.Tasks;
 
 namespace MarsqaProject.Pages
 {
-    public class SkillPage : CommonDriver
+    public class SkillPage : ExtentReport
     {
-        public readonly By activeTab = By.XPath("//div[contains(@class, 'ui bottom attached tab segment') and contains(@class, 'active')]");
-        public readonly By skillTab = By.XPath("//a[text()=\"Skills\"]");
-        public readonly By addSkillTextBox = By.XPath("//input[@placeholder=\"Add Skill\"]");
-        public readonly By skillLevelDropdown = By.XPath("//select[@name=\"level\"]");
-        public By levelOption;
-        public readonly By skillAddNewButton = By.XPath("//div[@data-tab=\"second\"]//div[@class=\"ui teal button\"]");
-        public readonly By addButton = By.XPath("//div[@data-tab=\"second\"]//input[@value=\"Add\"]");
-        public readonly By cancelButton = By.XPath("//div[@data-tab=\"second\"]//input[@value=\"Cancel\"]");
-        public By editOption;
-        public By deleteOption;
-        private By skillAndNewButton;
-        public readonly By updateButton = By.XPath("//div[@data-tab=\"second\"]//input[@value=\"Update\"]");
-
-
-
-        public void NavigateToSkillsTab(IWebDriver driver)
+        private readonly IWebDriver _driver;
+        public SkillPage(IWebDriver driver)
         {
-
-
-            Wait.WaitToBeVisible(driver, skillTab);
-            driver.FindElement(skillTab).Click();
-        }
-        public void ClickAddNewButton(IWebDriver driver)
-        {
-            Wait.WaitToBeVisible(driver, skillAndNewButton);
-            driver.FindElement(skillAndNewButton).Click();
+            _driver = driver;
         }
 
+        public readonly By active_tab = By.XPath("//div[contains(@class, 'ui bottom attached tab segment') and contains(@class, 'active')]");
+        public readonly By skill_tab = By.XPath("//a[text()=\"Skills\"]");
+        public readonly By add_skill_input = By.XPath("//input[@placeholder=\"Add Skill\"]");
+        public readonly By skill_Level_dropdown = By.XPath("//select[@name=\"level\"]");
+        public By level_option;
+        public readonly By skill_andnew_button = By.XPath("//div[@data-tab=\"second\"]//div[@class=\"ui teal button\"]");
+        public readonly By add_button = By.XPath("//div[@data-tab=\"second\"]//input[@value=\"Add\"]");
+        public readonly By cancel_button = By.XPath("//div[@data-tab=\"second\"]//input[@value=\"Cancel\"]");
+        public By edit_icon;
+        public By delete_icon;
+        public readonly By update_button = By.XPath("//div[@data-tab=\"second\"]//input[@value=\"Update\"]");
+        public By last_row_skill = By.XPath("//table[@class='ui fixed table']/tbody[last()]/tr[last()]/td[1]");
+        public By last_row_level = By.XPath("//table[@class='ui fixed table']/tbody[last()]/tr[last()]/td[2]");
+        public void NavigateToSkillsTab()
+        {
+            Wait.WaitToBeVisible(_driver, skill_tab);
+            _driver.FindElement(skill_tab).Click();
+        }
+        public void ClickAddNewButton()
+        {
+            Wait.WaitToBeVisible(_driver, skill_andnew_button);
+            _driver.FindElement(skill_andnew_button).Click();
+        }
+        public string GetLastRowSkill()
+        {
+            Wait.WaitToBeVisible(_driver, last_row_skill);
+            return _driver.FindElement(last_row_skill).Text;
+        }
+        public string GetLastRowLevel()
+        {
+            Wait.WaitToBeVisible(_driver, last_row_level);
+            return _driver.FindElement(last_row_level).Text;
+        }
 
-        public void InputSkillDetails(IWebDriver driver, string type, string skill, string level)
+        public void InputSkillDetails(string type, string skill, string level)
         {
             if (level == "" || level == null)
             {
                 level = "Choose Skill Level";
             }
-            Wait.WaitToBeVisible(driver, addSkillTextBox);
+            Wait.WaitToBeVisible(_driver, add_skill_input);
             if (type == "new")
             {
-                driver.FindElement(addSkillTextBox).SendKeys(skill);
-                driver.FindElement(skillLevelDropdown).Click();
-                levelOption = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
-                driver.FindElement(levelOption).Click();
+                _driver.FindElement(add_skill_input).SendKeys(skill);
+                _driver.FindElement(skill_Level_dropdown).Click();
+                level_option = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
+                _driver.FindElement(level_option).Click();
             }
             else if (type == "edit")
             {
-                driver.FindElement(addSkillTextBox).Clear();
-                driver.FindElement(addSkillTextBox).SendKeys(skill);
-                driver.FindElement(skillLevelDropdown).Click();
-                levelOption = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
-                driver.FindElement(levelOption).Click();
+                _driver.FindElement(add_skill_input).Clear();
+                _driver.FindElement(add_skill_input).SendKeys(skill);
+                _driver.FindElement(skill_Level_dropdown).Click();
+                level_option = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
+                _driver.FindElement(level_option).Click();
             }
         }
-        public void ClickAddButton(IWebDriver driver)
+        public void ClickAddButton()
         {
-            driver.FindElement(addButton).Click();
+            _driver.FindElement(add_button).Click();
         }
-        public void ClickCancelButton(IWebDriver driver)
+        public void ClickCancelButton()
         {
-            driver.FindElement(cancelButton).Click();
+            _driver.FindElement(cancel_button).Click();
         }
-        public void ClickEditIcon(IWebDriver driver, string skill)
+        public void ClickEditIcon(string skill)
         {
-            editOption = By.XPath("//td[text()='" + skill + "']/following-sibling::td[@class='right aligned']//i[@class='outline write icon']");
-            Wait.WaitToBeClickable(driver, editOption);
-            driver.FindElement(editOption).Click();
+            edit_icon = By.XPath("//td[text()='" + skill + "']/following-sibling::td[@class='right aligned']//i[@class='outline write icon']");
+            Wait.WaitToBeVisible(_driver, edit_icon);
+            _driver.FindElement(edit_icon).Click();
         }
-        public void ClickDeleteIcon(IWebDriver driver, string skill)
+        public void ClickDeleteIcon(string skill)
         {
 
-            deleteOption = By.XPath("//td[text()='" + skill + "']/following-sibling::td[@class='right aligned']//i[@class='remove icon']");
-            Wait.WaitToBeClickable(driver, deleteOption);
-            driver.FindElement(deleteOption).Click();
+            delete_icon = By.XPath("//td[text()='" + skill + "']/following-sibling::td[@class='right aligned']//i[@class='remove icon']");
+            Wait.WaitToBeVisible(_driver, delete_icon);
+            _driver.FindElement(delete_icon).Click();
         }
-        public void ClickUpdateButton(IWebDriver driver)
+        public void ClickUpdateButton()
         {
-            driver.FindElement(updateButton).Click();
+            Wait.WaitToBeVisible(_driver, update_button);
+            _driver.FindElement(update_button).Click();
         }
 
-        public int GetSkillCount(IWebDriver driver)
+        public int GetSkillCount()
         {
-            driver.FindElement(skillTab).Click();
-            IWebElement _active_tab = driver.FindElement(activeTab);
+            _driver.FindElement(skill_tab).Click();
+            Wait.WaitToBeVisible(_driver, active_tab);
+            IWebElement _active_tab = _driver.FindElement(active_tab);
             By row = By.XPath(".//table[contains(@class, 'ui fixed table')]//tbody//tr");
             IReadOnlyCollection<IWebElement> rows = _active_tab.FindElements(row);
             int _count = rows.Count;
-            Console.WriteLine($"Row count in the active tab: {_count}");
+            Log.Information($"Row count in the active tab: {_count}");
             return _count;
         }
 
 
-        public void ClearUpAllTheData(IWebDriver driver)
+        public void ClearUpAllTheData()
         {
-            IReadOnlyCollection<IWebElement> remove_icon = driver.FindElements(By.XPath("//div[@data-tab=\"second\"]//i[@class=\"remove icon\"]"));
+            _driver.FindElement(skill_tab).Click();
+            IWebElement _active_tab = _driver.FindElement(active_tab);
+
+            IReadOnlyCollection<IWebElement> remove_icon = _driver.FindElements(By.XPath("//div[@data-tab=\"second\"]//i[@class=\"remove icon\"]"));
+
             foreach (IWebElement icon in remove_icon)
             {
+
                 icon.Click();
             }
-            driver.Navigate().Refresh();
+            _driver.Navigate().Refresh();
         }
+
 
     }
 }
