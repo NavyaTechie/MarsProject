@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace MarsqaProject.Utilities
 {
     public class ExtentReport
-    {
+    {/*
         public static ExtentReport _extentReport;
 
         public static string dir = AppDomain.CurrentDomain.BaseDirectory;
@@ -53,9 +53,9 @@ namespace MarsqaProject.Utilities
             string screenshotLocation = Path.Combine(filePath, scenarioContext.ScenarioInfo.Title + ".png");
             screenshot.SaveAsFile(screenshotLocation);
             return screenshotLocation;
-        }
+        } */
     }
-
+        
 
 }
 

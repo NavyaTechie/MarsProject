@@ -19,16 +19,16 @@ namespace MarsqaProject.Pages
             _driver = driver;
         }
 
-        private IWebElement email_input => _driver.FindElement(By.XPath("//input[@name=\"email\"]"));
-        private IWebElement password_input => _driver.FindElement(By.XPath("//input[@name=\"password\"]"));
-        private IWebElement login_button => _driver.FindElement(By.XPath("//button[text()=\"Login\"]"));
+        private IWebElement EmailInput => _driver.FindElement(By.XPath("//input[@name=\"email\"]"));
+        private IWebElement PasswordInput => _driver.FindElement(By.XPath("//input[@name=\"password\"]"));
+        private IWebElement LoginButton => _driver.FindElement(By.XPath("//button[text()=\"Login\"]"));
 
         public void ClickLoginButton(string email, string password)
         {
 
-            email_input.SendKeys(email);
-            password_input.SendKeys(password);
-            login_button.Click();
+            EmailInput.SendKeys(email);
+            PasswordInput.SendKeys(password);
+            LoginButton.Click();
         }
     }
 }

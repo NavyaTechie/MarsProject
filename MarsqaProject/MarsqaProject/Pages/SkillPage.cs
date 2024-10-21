@@ -1,5 +1,6 @@
 ﻿using MarsqaProject.Utilities;
 using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,11 @@ namespace MarsqaProject.Pages
         public readonly By skill_Level_dropdown = By.XPath("//select[@name=\"level\"]");
         public By level_option;
         public readonly By skill_andnew_button = By.XPath("//div[@data-tab=\"second\"]//div[@class=\"ui teal button\"]");
-        public readonly By add_button = By.XPath("//div[@data-tab=\"second\"]//input[@value=\"Add\"]");
-        public readonly By cancel_button = By.XPath("//div[@data-tab=\"second\"]//input[@value=\"Cancel\"]");
+        public readonly By add_button = By.XPath("//div[@data-tab=\"second\"]//input[@obj=\"Add\"]");
+        public readonly By cancel_button = By.XPath("//div[@data-tab=\"second\"]//input[@obj=\"Cancel\"]");
         public By edit_icon;
         public By delete_icon;
-        public readonly By update_button = By.XPath("//div[@data-tab=\"second\"]//input[@value=\"Update\"]");
+        public readonly By update_button = By.XPath("//div[@data-tab=\"second\"]//input[@obj=\"Update\"]");
         public By last_row_skill = By.XPath("//table[@class='ui fixed table']/tbody[last()]/tr[last()]/td[1]");
         public By last_row_level = By.XPath("//table[@class='ui fixed table']/tbody[last()]/tr[last()]/td[2]");
         public void NavigateToSkillsTab()
@@ -108,7 +109,7 @@ namespace MarsqaProject.Pages
             By row = By.XPath(".//table[contains(@class, 'ui fixed table')]//tbody//tr");
             IReadOnlyCollection<IWebElement> rows = _active_tab.FindElements(row);
             int _count = rows.Count;
-            Log.Information($"Row count in the active tab: {_count}");
+            object obj = Log.Information($"Row count in the active tab: {_count}");
             return _count;
         }
 

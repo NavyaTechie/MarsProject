@@ -139,9 +139,6 @@ namespace MarsqaProject.StepDefinition
             string language = _languagePage.getLastRowLanguage();
             string level = _languagePage.getLastRowLevel();
 
-            /*Assert.IsTrue(_languagePage.GetLanguageCount().Equals(_scenarioContext["language_count"]));
-            Assert.IsTrue(language.Equals(_scenarioContext["language"].ToString()));
-            Assert.IsTrue(level.Equals(_scenarioContext["level"].ToString()));*/
 
             ValidateLanguageCount();
             ValidateLanguageAndLevel(language, level);
@@ -179,7 +176,7 @@ namespace MarsqaProject.StepDefinition
                 _languagePage.ClickAddNewButton();
                 _languagePage.InputNewLanguageDetails("new", row[0], row[1]);
                 _languagePage.ClickAddButton();
-                // _profilePage.ClickMessageCloseButton();
+                _profilePage.ClickMessageCloseButton();
                 _scenarioContext["language_new"] = row[0];
                 _scenarioContext["level_new"] = row[1];
 
@@ -214,7 +211,7 @@ namespace MarsqaProject.StepDefinition
             foreach (TableRow row in table.Rows)
             {
                 _languagePage.InputNewLanguageDetails("edit", row[0], row[1]);
-                // _profilePage.ClickMessageCloseButton();
+                _profilePage.ClickMessageCloseButton();
                 _scenarioContext["language_update"] = row[0];
                 _scenarioContext["level_update"] = row[1];
             }
@@ -288,3 +285,4 @@ namespace MarsqaProject.StepDefinition
             _languagePage.ClickUpdateButton();
         }
     }
+}

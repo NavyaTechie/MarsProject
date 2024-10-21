@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MarsqaProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+96a274c1b1ee37dc69c5929a6c213b0ab93f2895")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5e67c9d46aee2b232b0a136389ea5b43cf16ea3")]
 [assembly: System.Reflection.AssemblyProductAttribute("MarsqaProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MarsqaProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

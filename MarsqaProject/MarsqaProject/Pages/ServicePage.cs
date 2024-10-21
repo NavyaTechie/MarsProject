@@ -17,11 +17,11 @@ namespace MarsqaProject.Pages
         }
 
 
-        private IWebElement service_name => _driver.FindElement(By.XPath("//span[@class = \"skill-title\"]"));
+        private IWebElement serviceName => _driver.FindElement(By.XPath("//span[@class = \"skill-title\"]"));
         public string GetSkillTitle()
         {
 
-            return service_name.Text;
+            return serviceName.Text;
         }
         
     }
