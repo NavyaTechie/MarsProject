@@ -2,36 +2,10 @@
 Feature: user can operate a language
 
 
-
-
-
 Background:
-	Given User login the system
+	Given User is logged in the system
 	When The data is clean up  
 	And Navigate to the language tab
-
-@Regression
-Scenario: View the language list with 4 records
-	Given Add a language succeed
-		| language | level        |
-		| Java  | Basic     |
-		| C#    | Fluent       |
-		| JS    | Native/Bilingual |
-		| Mandarin    | Native/Bilingual |
-	When I click the language tab
-	Then I should see the language list with correct information
-	And The AndNew button is invisible
-
-@Regression
-Scenario: View the language list with 3 records
-	Given Add a language succeed
-		| language | level        |
-		| Java  | Basic     |
-		| C#    | Fluent       |
-		| JS    | Native/Bilingual |
-	When I click the language tab
-	Then I should see the language list with correct information
-	And The AndNew button is visible
 
 @Positive @Regression
 Scenario Outline: Create a language with valid value
@@ -41,7 +15,19 @@ Scenario Outline: Create a language with valid value
 	Then New language is created
 Examples:
 	| language | level    |
-	| Java  | Fluent |
+	| English  | Fluent |
+
+@Regression
+Scenario: Viewing list with 4 records
+	Given Add a language succeed
+		| language | level         |
+		| Hindi  | Conversational  |
+		| English   | Fluent           |
+		| Malayalam    | Native/Bilingual |
+		| Tamil      | Basic |
+	When I click the language tab
+	Then I should see the language list with correct information
+	And The AndNew button is invisible
 
 @Regression
 Scenario Outline: Cancel to create a new language with valid value
@@ -51,7 +37,7 @@ Scenario Outline: Cancel to create a new language with valid value
 	Then No more language is created
 Examples:
 	| language | level    |
-	| Java  | Fluent |
+	| English  | Fluent |
 
 @Negative
 Scenario Outline: Create new language with empty value
@@ -60,27 +46,27 @@ Scenario Outline: Create new language with empty value
 	Then No more language is created
 Examples:
 	| language | level              |
-	|       | Fluent           |
-	| Java  | Choose Language Level |
+	|       | Fluent                |
+	| Hindi  | Choose Language Level |
 
 @Negative
 Scenario: Duplicate language Name with same level
 	Given Add a language succeed
 		| language | level    |
-		| Java  | Fluent |
+		| English  | Fluent |
 	When Add another language
 		| language | level    |
-		| Java  | Fluent |
+		| English  | Fluent |
 	Then No more language is created
 
 @Negative
 Scenario: Skill name Case Sensitivity
 	Given Add a language succeed
 		| language | level    |
-		| Java  | Fluent |
+		| English  | Fluent |
 	When Add another language
 		| language | level    |
-		| java  | Fluent |
+		| english  | Fluent |
 	Then No more language is created
 
 @Negative @Destructive
@@ -95,7 +81,7 @@ Examples:
 
 
 @Negative @Destructive
-Scenario Outline: SQL Injection in language name
+Scenario Outline: Update language with SQL Injection in name
 	Given Click the language AddNew Button
 	When Input the language name "<language>" and level "<level>"
 	And Click the language Add button
@@ -116,7 +102,7 @@ Examples:
 
 
 @Negative @Destructive
-Scenario: Extremely long Language name
+Scenario: Update language with huge payloads 
 	Given Click the language AddNew Button
 	When Input the language name "<language>" and level "<level>"
 	And Click the language Add button
@@ -126,34 +112,34 @@ Examples:
 	| 3,000 'n' characters | Fluent |
 
 @Regression
-Scenario Outline: Delete a language
+Scenario Outline: Delete a language from list
 	Given Add a language succeed
 		| language | level    |
-		| Java  | Fluent |
+		| English  | Fluent |
 	When Click the language delete icon
 	Then The language will be delete
 
 
 @Regression
-Scenario: Update a language with new name
+Scenario: Updating a language with new name
 	Given Add a language succeed
 		| language | level    |
-		| Java  | Fluent |
+		| English  | Fluent |
 	When Click the language edit icon
 	And Update the language
 		| language | level  |
-		| C#    | Fluent |
+		| French    | Fluent |
 	And Click language update button
 	Then The language is updated
 
 @Regression
-Scenario: Cancel to update a language
+Scenario: Cancelling to update a language
 	Given Add a language succeed
 		| language | level    |
-		| Java  | Fluent |
+		| English  | Fluent |
 	When Click the language edit icon
 	And Update the language
 		| language | level  |
-		| C#    | Fluent |
+		| French    | Fluent |
 	And Click the language cancel button
 	Then The language is not updated

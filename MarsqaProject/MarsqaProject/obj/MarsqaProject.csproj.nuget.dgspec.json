@@ -58,10 +58,6 @@
               "target": "Package",
               "version": "[6.12.1, )"
             },
-            "FluentValidation": {
-              "target": "Package",
-              "version": "[11.10.0, )"
-            },
             "Gherkin": {
               "target": "Package",
               "version": "[29.0.0, )"
@@ -84,7 +80,7 @@
             },
             "NUnit": {
               "target": "Package",
-              "version": "[4.2.2, )"
+              "version": "[3.13.3, )"
             },
             "NUnit3TestAdapter": {
               "target": "Package",
@@ -98,13 +94,9 @@
               "target": "Package",
               "version": "[4.25.0, )"
             },
-            "Selenium.WebDriver.ChromeDriver": {
-              "target": "Package",
-              "version": "[130.0.6723.5800, )"
-            },
             "Serilog": {
               "target": "Package",
-              "version": "[4.0.2, )"
+              "version": "[4.1.0, )"
             },
             "Serilog.Sinks.Console": {
               "target": "Package",

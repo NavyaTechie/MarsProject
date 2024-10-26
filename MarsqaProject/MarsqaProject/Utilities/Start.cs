@@ -9,7 +9,7 @@ using Serilog;
 
 namespace MarsqaProject.Utilities
 {
-    public  static class Logger
+    public  static class Start
     {      
 
         

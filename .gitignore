@@ -1,0 +1,10 @@
+# Ignore build files
+/build/
+
+# Ignore specific files
+*.log
+*.tmp
+# Ignore Visual Studio and build folders
+.vs/
+bin/
+obj/

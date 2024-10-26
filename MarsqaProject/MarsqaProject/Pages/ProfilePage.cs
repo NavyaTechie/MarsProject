@@ -11,10 +11,10 @@ namespace MarsqaProject.Pages
 {
     public class ProfilePage
     {
-        private readonly IWebDriver driver;
-        public ProfilePage(IWebDriver Driver)
+        private readonly IWebDriver _driver;
+        public ProfilePage(IWebDriver driver)
         {
-            Driver = driver;
+            _driver = driver;
         }
 
         public By serviceTab = By.XPath("//a[text()=\"Services\"]");
@@ -25,32 +25,38 @@ namespace MarsqaProject.Pages
 
         public void ClickLanguagesTab()
         {
-            Wait.WaitToBeVisible(driver, languageTab);
-            driver.FindElement(languageTab).Click();
+            Wait.WaitToBeVisible(_driver, languageTab);
+            _driver.FindElement(languageTab).Click();
         }
         public void ClickSkillsTab()
         {
-            Wait.WaitToBeVisible(driver, skillTab);
+            Wait.WaitToBeVisible(_driver, skillTab);
 
-            driver.FindElement(skillTab).Click();
+            _driver.FindElement(skillTab).Click();
         }
         public void ClickServicesTab()
         {
-            Wait.WaitToBeVisible(driver, serviceTab);
-            driver.FindElement(serviceTab).Click();
+            Wait.WaitToBeVisible(_driver, serviceTab);
+            _driver.FindElement(serviceTab).Click();
 
         }
 
         public string GetMessage()
         {
-            string message = driver.FindElement(messageDiv).Text;
+            string message = _driver.FindElement(messageDiv).Text;
             Log.Information(message);
             return message;
         }
 
         public void ClickMessageCloseButton()
         {
-            driver.FindElement(messageCloseButton).Click();
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
+            IList<IWebElement> elements = _driver.FindElements(By.XPath("//a[@class='ns-close']"));
+            Console.WriteLine(elements.Count);
+            if (elements.Count>0)
+            {
+                _driver.FindElement(By.XPath("//a[@class='ns-close']")).Click();
+            }
         }    
     }
     }

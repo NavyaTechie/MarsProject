@@ -76,7 +76,7 @@ namespace MarsqaProject.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Display seller\'s details matching entered search string")]
-        [NUnit.Framework.TestCaseAttribute("QA Tester", "James John", null)]
+        [NUnit.Framework.TestCaseAttribute("QA Tester", "Sangeetha Narayan", null)]
         public void DisplaySellersDetailsMatchingEnteredSearchString(string skill, string seller, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
@@ -84,7 +84,7 @@ namespace MarsqaProject.Features
             argumentsOfScenario.Add("skill", skill);
             argumentsOfScenario.Add("seller", seller);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Display seller\'s details matching entered search string", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 6
+#line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -94,65 +94,23 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
+#line 6
  testRunner.Given("I navigate to the homepage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 7
+ testRunner.When(string.Format("I enter a skill \"{0}\" into the search bar", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- testRunner.When(string.Format("I enter a skill \"{0}\" into the search bar", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I click the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 9
- testRunner.And("I click the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I should see a list of services matching the entered skill", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 10
- testRunner.Then("I should see a list of services matching the entered skill", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 11
  testRunner.When(string.Format("I click the \"{0}\" infomation and I have logged in the system", seller), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 12
+#line 11
  testRunner.Then("The system should display the seller\'s details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Display the service details matching entered search string")]
-        [NUnit.Framework.TestCaseAttribute("QA Tester", "API Testing", null)]
-        public void DisplayTheServiceDetailsMatchingEnteredSearchString(string skill, string service, string[] exampleTags)
-        {
-            string[] tagsOfScenario = exampleTags;
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("skill", skill);
-            argumentsOfScenario.Add("service", service);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Display the service details matching entered search string", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 19
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 20
- testRunner.Given("I navigate to the homepage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 21
- testRunner.When(string.Format("I enter a skill \"{0}\" into the search bar", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 22
- testRunner.And("I click the search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 23
- testRunner.Then("I should see a list of services matching the entered skill", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 24
- testRunner.When(string.Format("I click the \"{0}\" infomation", service), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 25
- testRunner.Then("The system should display the details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

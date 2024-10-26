@@ -13,7 +13,7 @@ using TechTalk.SpecFlow.Assist;
 namespace MarsqaProject.StepDefinition
 {
     [Binding]
-    public class SearchSkillStepDefinition : BasicTests
+    public class SearchSkillStepDefinition : CommonDriver
     {
         private IWebDriver _driver;
         private HomePage _homePage;
@@ -72,11 +72,11 @@ namespace MarsqaProject.StepDefinition
             {
                 string email = GetAppConfig("username");
                 string password = GetAppConfig("password");
-
-                _loginPage.ClickLoginButton(email, password);
-                SetUserLoggedIn(true);
-                Log.Information("User logged in successfully.");
-            }
+                 
+            _loginPage.ClickLoginButton(email, password);
+            SetUserLoggedIn(true);
+            Log.Information("User logged in successfully.");
+           } 
 
 
         }

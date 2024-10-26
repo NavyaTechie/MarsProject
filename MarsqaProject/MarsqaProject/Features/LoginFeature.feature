@@ -1,8 +1,8 @@
 ﻿Feature: LoginFeature
 
-As a registerred user
+As a registered user
 I want to log in to the application
-So that i can access my personalized profile
+So that i can view my personalized profile
 
 @regression
 

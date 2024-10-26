@@ -17,8 +17,8 @@ namespace MarsqaProject.Pages
             _driver = driver;
         }
         public readonly By signIn = By.XPath("//a[text()='Sign In']");
-        public readonly By searchInputBar = By.XPath("//input[@placeholder=\"What skill would you like to trade?\"]");
-        public readonly By searchButton = By.XPath("//button[text()=\"Search\"]");
+        public readonly By searchInputBar = By.XPath("//input[@placeholder='What skill would you like to trade?']");
+        public readonly By searchButton = By.XPath("//button[text()='Search']");
 
         public void ClickSignInLink()
         {
@@ -29,7 +29,7 @@ namespace MarsqaProject.Pages
         public void InputSearchString(string search)
         {
             Wait.WaitToBeClickable(_driver, searchInputBar);
-            _driver.FindElement(searchButton).SendKeys(search);
+            _driver.FindElement(searchInputBar).SendKeys(search);
         }
         public void ClickSearchButton()
         {

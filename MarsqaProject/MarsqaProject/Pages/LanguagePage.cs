@@ -11,15 +11,13 @@ namespace MarsqaProject.Pages
 {
     public class LanguagePage
     {
-        private readonly IWebDriver driver;
-        public LanguagePage(IWebDriver Driver)
+        private readonly IWebDriver _driver;
+        public LanguagePage(IWebDriver driver)
         {
-            Driver = driver;
+            _driver = driver;
         }
 
         public readonly By languageTab = By.XPath("//a[text()=\"Languages\"]");
-
-       // public readonly By languange_question_text = By.XPath("//div[contains(text(), 'How many languages do you speak?')]");
 
         public readonly By addLanguageInput = By.XPath("//input[@placeholder=\"Add Language\"]");
         public readonly By languageLevelDropdown = By.XPath("//select[@name=\"level\"]");
@@ -44,31 +42,13 @@ namespace MarsqaProject.Pages
 
         public void RefreshPage()
         {
-            driver.Navigate().Refresh();
+            _driver.Navigate().Refresh();
         }
-        /* public void ClickMessageCloseButton()
-         {
-             Wait.WaitToBeVisible(driver, msgCloseButton);
-             try
-             {
-                 IWebElement webElement = driver.FindElement(msgCloseButton);
-                 if (webElement != null)
-                 {
-                     webElement.Click();
-                 }
-             }
-             catch (StaleElementReferenceException)
-             {
-                 // Handle the case where the element is stale and re-fetch
-                 Log.Information("Stale element, refreshing collection...");
-             }
-
-
-         } */
+        
         public void ClickMessageCloseButton()
         {
             // Wait until the message close button is visible
-            Wait.WaitToBeVisible(driver, msgCloseButton);
+            Wait.WaitToBeVisible(_driver, msgCloseButton);
 
             // Retry mechanism for stale element reference
             const int maxRetries = 3;
@@ -79,7 +59,7 @@ namespace MarsqaProject.Pages
                 try
                 {
                     // Attempt to find and click the close button
-                    driver.FindElement(msgCloseButton).Click();
+                    _driver.FindElement(msgCloseButton).Click();
                     Log.Information("Message close button clicked successfully.");
                     break; // Break out of loop if successful
                 }
@@ -110,22 +90,22 @@ namespace MarsqaProject.Pages
 
         public void NavigateToLanguageTab()
         {
-            Wait.WaitToBeClickable(driver, languageTab);
-            driver.FindElement(languageTab).Click();
+            Wait.WaitToBeClickable(_driver, languageTab);
+            _driver.FindElement(languageTab).Click();
         }
         public void ClickAddNewButton()
         {
-            Wait.WaitToBeClickable(driver, languageAddNewButton);
-            driver.FindElement(languageAddNewButton).Click();
+            Wait.WaitToBeClickable(_driver, languageAddNewButton);
+            _driver.FindElement(languageAddNewButton).Click();
         }
 
-        public bool AddBewButtonIsVisible()
+        public bool AddNewButtonIsVisible()
         {
             if (languageAddNewButton != null)
             {
                 try
                 {
-                    IWebElement addNewButton = driver.FindElement(languageAddNewButton);
+                    IWebElement addNewButton = _driver.FindElement(languageAddNewButton);
                     return true;
                 }
                 catch (NoSuchElementException ex)
@@ -148,47 +128,47 @@ namespace MarsqaProject.Pages
             }
             if (type == "new")
             {
-                driver.FindElement(addLanguageInput).SendKeys(language);
-                driver.FindElement(languageLevelDropdown).Click();
+                _driver.FindElement(addLanguageInput).SendKeys(language);
+                _driver.FindElement(languageLevelDropdown).Click();
                 languageLevelOption = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
-                driver.FindElement(languageLevelOption).Click();
+                _driver.FindElement(languageLevelOption).Click();
             }
             else if (type == "edit")
             {
-                driver.FindElement(addLanguageInput).Clear();
-                driver.FindElement(addLanguageInput).SendKeys(language);
-                driver.FindElement(languageLevelDropdown).Click();
+                _driver.FindElement(addLanguageInput).Clear();
+                _driver.FindElement(addLanguageInput).SendKeys(language);
+                _driver.FindElement(languageLevelDropdown).Click();
                 languageLevelOption = By.XPath("//select[@name=\"level\"]//option[text()=\"" + level + "\"]");
-                driver.FindElement(languageLevelOption).Click();
+                _driver.FindElement(languageLevelOption).Click();
             }
 
         }
 
         public void ClickAddButton()
         {
-            driver.FindElement(addButton).Click();
+            _driver.FindElement(addButton).Click();
         }
 
         public string getLastRowLanguage()
         {
-            Wait.WaitToBeVisible(driver, lastrowLanguage);
-            return driver.FindElement(lastrowLanguage).Text;
+            Wait.WaitToBeVisible(_driver, lastrowLanguage);
+            return _driver.FindElement(lastrowLanguage).Text;
         }
 
         public string getLastRowLevel()
         {
-            Wait.WaitToBeVisible(driver, lastrowLevel);
-            return driver.FindElement(lastrowLevel).Text;
+            Wait.WaitToBeVisible(_driver, lastrowLevel);
+            return _driver.FindElement(lastrowLevel).Text;
         }
         public void ClickCancelButton()
         {
-            driver.FindElement(cancelButton).Click();
+            _driver.FindElement(cancelButton).Click();
         }
         public int GetLanguageCount()
         {
-            driver.FindElement(languageTab).Click();
-            Wait.WaitToBeVisible(driver, activeTab);
-            IWebElement _active_tab = driver.FindElement(activeTab);
+            _driver.FindElement(languageTab).Click();
+            Wait.WaitToBeVisible(_driver, activeTab);
+            IWebElement _active_tab = _driver.FindElement(activeTab);
             By row = By.XPath(".//table[contains(@class, 'ui fixed table')]//tbody//tr");
             IReadOnlyCollection<IWebElement> rows = _active_tab.FindElements(row);
             int _count = rows.Count;
@@ -199,25 +179,25 @@ namespace MarsqaProject.Pages
         public void ClickEditIconOfALanguage(string language)
         {
             editButton = By.XPath("//td[text()='" + language + "']/following-sibling::td[@class='right aligned']//i[@class='outline write icon']");
-            driver.FindElement(editButton).Click();
+            _driver.FindElement(editButton).Click();
         }
 
         public void ClickDeleteIconOfALanguage(string language)
         {
             deleteButton = By.XPath("//td[text()='" + language + "']/following-sibling::td[@class='right aligned']//i[@class='remove icon']");
-            driver.FindElement(deleteButton).Click();
+            _driver.FindElement(deleteButton).Click();
         }
 
         public void ClickUpdateButton()
         {
-            driver.FindElement(updateButton).Click();
+            _driver.FindElement(updateButton).Click();
         }
 
         public void ClearUpAllTheData()
         {
             try
             {
-                IReadOnlyCollection<IWebElement> removeIcons = driver.FindElements(By.XPath("//div[@data-tab='first']//i[@class='remove icon']"));
+                IReadOnlyCollection<IWebElement> removeIcons = _driver.FindElements(By.XPath("//div[@data-tab='first']//i[@class='remove icon']"));
                 while (removeIcons.Count > 0)
                 {
                     foreach (IWebElement icon in removeIcons.ToList())
@@ -225,7 +205,7 @@ namespace MarsqaProject.Pages
                         try
                         {
                             // Click on the remove icon
-                            Wait.WaitToBeClickable(driver, icon);
+                            Wait.WaitToBeClickable(_driver, icon);
                             icon.Click();
 
 
@@ -238,11 +218,11 @@ namespace MarsqaProject.Pages
                     }
 
                     // Re-fetch the list of remove icons, as they may have changed after each click
-                    removeIcons = driver.FindElements(By.XPath("//div[@data-tab='first']//i[@class='remove icon']"));
+                    removeIcons = _driver.FindElements(By.XPath("//div[@data-tab='first']//i[@class='remove icon']"));
                 }
 
                 // Refresh the page after clearing all the elements
-                driver.Navigate().Refresh();
+                _driver.Navigate().Refresh();
             }
             catch (Exception ex)
             {

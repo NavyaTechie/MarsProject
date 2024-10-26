@@ -14,18 +14,19 @@ using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
+using WebDriverManager.Helpers;
 
 
 namespace MarsqaProject.Utilities
 {
-    public class BasicTests : ExtentReport
+    public class CommonDriver 
     {
 
         private IWebDriver _driver;
         private LoginPage _loginPage;
         protected readonly FeatureContext _featureContext;
 
-        public BasicTests(IWebDriver driver, FeatureContext featureContext)
+        public CommonDriver(IWebDriver driver, FeatureContext featureContext)
         {
             _driver = driver;
             _loginPage = new LoginPage(_driver);
@@ -56,7 +57,7 @@ namespace MarsqaProject.Utilities
             switch (browserType.ToLower())
             {
                 case "chrome":
-                    new DriverManager().SetUpDriver(new ChromeConfig());
+                    new DriverManager().SetUpDriver(new ChromeConfig(),VersionResolveStrategy.MatchingBrowser);
                     _driver = new ChromeDriver();
                     break;
                 case "firefox":
@@ -77,7 +78,7 @@ namespace MarsqaProject.Utilities
             //get AppConfig.json directory
 
             string configPath = System.IO.Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory + "../../../").FullName
-                  + "\\Config\\AppConfig.json";
+                  + "\\ConfigFile\\AppConfig.json";
 
             if (!File.Exists(configPath))
             {
